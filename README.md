@@ -1,0 +1,2 @@
+# COEN-ELEC-390-PROJECT
+COEN/ELEC 390 PROJECT for motion sensor
