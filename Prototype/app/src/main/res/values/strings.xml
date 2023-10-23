@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Prototype</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="cam_footage">Cam Footage</string>
+    <string name="connect_device">Connect Device</string>
+</resources>
