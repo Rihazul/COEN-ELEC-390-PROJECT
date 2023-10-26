@@ -12,5 +12,14 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="buttonGradientStartColor">@color/light_blue</item>
+        <item name="buttonGradientEndColor">@color/dark_blue</item>
+        <item name="buttonBorderColor">@color/dark_blue</item>
+
+        <item name="colorAccent">@color/deep_navy_blue</item>
     </style>
+
+    <attr name="buttonGradientStartColor" format="color" />
+    <attr name="buttonGradientEndColor" format="color" />
+    <attr name="buttonBorderColor" format="color" />
 </resources>

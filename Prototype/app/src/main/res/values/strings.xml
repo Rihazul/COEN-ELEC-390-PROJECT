@@ -1,7 +1,23 @@
 <resources>
-    <string name="app_name">Prototype</string>
+    <string name="app_name">DoorWatch Prototype</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="cam_footage">Cam Footage</string>
     <string name="connect_device">Connect Device</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="welcome_message">Welcome to DoorWatch! Your doorstep, always in view. Let\'s get started!</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="login_to_your_account">Login to your account</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="login">Login</string>
+    <string name="create_account">Create Account</string>
+    <string name="enter_your_last_name">Enter your last name</string>
+    <string name="enter_your_first_name">Enter your first name</string>
+    <string name="create_your_new_account">Create your new account</string>
+    <string name="register">Register</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="already_have_an_account">Already have an account?</string>
 </resources>
