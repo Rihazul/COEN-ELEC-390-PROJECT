@@ -1,17 +1,17 @@
 package com.example.prototype;
 
-public class Video {
+public class CameraFootage {
     private String URL;
     private String date;
     private String time;
 
-    public Video() {
+    public CameraFootage() {
         URL = "";
         date = "";
         time = "";
     }
 
-    public Video(String URL, String date, String time) {
+    public CameraFootage(String URL, String date, String time) {
         this.URL = URL;
         this.date = date;
         this.time = time;

@@ -1,7 +1,6 @@
 package com.example.prototype;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHolder> {
-    private final List<Video> videoList;
-    private Context context;
+public class CameraFootageAdapter extends RecyclerView.Adapter<CameraFootageAdapter.VideoViewHolder> {
+    private final List<CameraFootage> cameraFootageList;
+    private final Context context;
 
-    public VideoAdapter(List<Video> videoList, Context context) {
-        this.videoList = videoList;
+    public CameraFootageAdapter(List<CameraFootage> cameraFootageList, Context context) {
+        this.cameraFootageList = cameraFootageList;
         this.context = context;
     }
 
@@ -33,30 +32,19 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
 
     @Override
     public void onBindViewHolder(@NonNull VideoViewHolder videoViewHolder, int position) {
-        Video video = videoList.get(position);
-        videoViewHolder.dateTextView.setText(video.getDate());
-        videoViewHolder.timeTextView.setText(video.getTime());
+        CameraFootage cameraFootage = cameraFootageList.get(position);
+        videoViewHolder.dateTextView.setText(cameraFootage.getDate());
+        videoViewHolder.timeTextView.setText(cameraFootage.getTime());
 
         MediaController mediaController = new MediaController(context);
         mediaController.setAnchorView(videoViewHolder.videoView);
         videoViewHolder.videoView.setMediaController(mediaController);
-        videoViewHolder.videoView.setVideoURI(Uri.parse(video.getURL()));
-
-        videoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, CameraFootageDetailsActivity.class);
-                intent.putExtra("videoURL", video.getURL());
-                intent.putExtra("date", video.getDate());
-                intent.putExtra("time", video.getTime());
-                context.startActivity(intent);
-            }
-        });
+        videoViewHolder.videoView.setVideoURI(Uri.parse(cameraFootage.getURL()));
     }
 
     @Override
     public int getItemCount() {
-        return videoList.size();
+        return cameraFootageList.size();
     }
 
     public static class VideoViewHolder extends RecyclerView.ViewHolder {
