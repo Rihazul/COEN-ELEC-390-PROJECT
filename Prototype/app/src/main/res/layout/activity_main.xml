@@ -8,19 +8,60 @@
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/camFootageButton"
+        android:id="@+id/motionSensorButton"
         android:layout_width="325dp"
         android:layout_height="55dp"
-        android:text="@string/cam_footage"
-        android:backgroundTint="@null"
         android:background="@drawable/button_gradient"
+        android:backgroundTint="@null"
+        android:text="@string/motion_sensor"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.367" />
+        app:layout_constraintVertical_bias="0.15" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/usSensorButton"
+        android:layout_width="325dp"
+        android:layout_height="55dp"
+        android:background="@drawable/button_gradient"
+        android:backgroundTint="@null"
+        android:text="@string/ultrasonic_sensor_data"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/motionSensorButton"
+        app:layout_constraintVertical_bias="0.117" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/camFootageButton"
+        android:layout_width="325dp"
+        android:layout_height="55dp"
+        android:background="@drawable/button_gradient"
+        android:backgroundTint="@null"
+        android:text="@string/cam_footage"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usSensorButton"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/liveAlertsButton"
+        android:layout_width="325dp"
+        android:layout_height="55dp"
+        android:background="@drawable/button_gradient"
+        android:backgroundTint="@null"
+        android:text="@string/live_alerts"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/camFootageButton"
+        app:layout_constraintVertical_bias="0.201" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/connectDeviceButton"
@@ -33,6 +74,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/camFootageButton"
-        app:layout_constraintVertical_bias="0.225" />
+        app:layout_constraintTop_toBottomOf="@+id/liveAlertsButton"
+        app:layout_constraintVertical_bias="0.354" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

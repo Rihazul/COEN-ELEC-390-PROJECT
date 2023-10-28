@@ -30,6 +30,10 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SignInActivity" />
+        <activity android:name=".MotionSensorDataActivity" />
+        <activity android:name=".USSensorDataActivity" />
+        <activity android:name=".LiveAlertsListActivity" />
+        <activity android:name=".LiveAlertsDetailsActivity" />
 
     </application>
 

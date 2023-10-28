@@ -12,9 +12,10 @@ import java.util.Objects;
 
 public class CameraFootageDetailsActivity extends AppCompatActivity {
 
-    private  VideoView videoView;
+    private VideoView videoView;
     private TextView dateView;
     private TextView timeView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

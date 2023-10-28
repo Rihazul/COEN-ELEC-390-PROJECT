@@ -19,6 +19,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Button createAccountButton;
     private CheckBox rememberMeButton;
     private Button alreadyHaveAccountButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }
+
     private void goToSignInActivity() {
         Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
         startActivity(intent);
