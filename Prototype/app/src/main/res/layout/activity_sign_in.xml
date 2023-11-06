@@ -46,33 +46,40 @@
         android:inputType="textEmailAddress"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
+        android:layout_marginTop="128dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpMessageTextView"
-        app:layout_constraintVertical_bias="0.237" />
+        app:layout_constraintVertical_bias="0.0"
+        app:errorTextColor="@color/error_color"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordInputLayout"
         android:layout_width="325dp"
         android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true"
+        android:hint="@string/enter_your_password"
+        android:layout_marginTop="19dp"
+        app:boxStrokeColor="@android:color/transparent"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailInput"
-        app:layout_constraintVertical_bias="0.095"
-        app:boxStrokeColor="@android:color/transparent">
+        app:layout_constraintVertical_bias="0.0"
+        app:endIconMode="password_toggle"
+        app:endIconTint="@color/deep_navy_blue"
+        app:errorTextColor="@color/error_color">
 
     <EditText
         android:id="@+id/passwordInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edittext_background"
-        android:hint="@string/enter_your_password"
         android:inputType="textPassword"
         android:paddingStart="12dp"
-        android:paddingEnd="12dp" />
+        android:paddingEnd="12dp"
+        android:textColorHint="@color/deep_navy_blue"/>
 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -88,7 +95,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout"
-        app:layout_constraintVertical_bias="0.119" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <CheckBox
         android:id="@+id/rememberMeButton"

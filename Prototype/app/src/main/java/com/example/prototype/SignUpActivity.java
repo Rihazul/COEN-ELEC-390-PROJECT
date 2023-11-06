@@ -67,6 +67,8 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if (validateInformation(user, confirmPassword)) {
                     saveUserInDatabase(user);
+                } else {
+                    Toast.makeText(SignUpActivity.this, "Invalid Information", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -106,8 +108,6 @@ public class SignUpActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("RememberMe", rememberMe);
                 editor.apply();
-
-                // Proceed with the authentication
             }
         });
 
@@ -163,10 +163,6 @@ public class SignUpActivity extends AppCompatActivity {
         if (!user.getPassword().equals(confirmPassword)) {
             confirmPasswordInputLayout.setError("Passwords do not match.");
              isValid = false;
-        }
-
-        if (!isValid) {
-            Toast.makeText(SignUpActivity.this, "Invalid Information", Toast.LENGTH_SHORT).show();
         }
 
         return isValid;
