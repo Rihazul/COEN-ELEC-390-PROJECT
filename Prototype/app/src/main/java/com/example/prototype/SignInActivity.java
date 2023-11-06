@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
@@ -21,6 +22,7 @@ public class SignInActivity extends AppCompatActivity {
 
     private EditText emailInput;
     private EditText passwordInput;
+    private TextInputLayout passwordInputLayout;
     private Button loginButton;
     private FirebaseAuth mAuth;
     private CheckBox rememberMeButton;
@@ -39,6 +41,7 @@ public class SignInActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         rememberMeButton = findViewById(R.id.rememberMeButton);
         forgotPasswordButton = findViewById(R.id.forgotPasswordButton);
+        passwordInputLayout = findViewById(R.id.passwordInputLayout);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,10 +90,10 @@ public class SignInActivity extends AppCompatActivity {
         }
 
         if (password.isEmpty()) {
-            passwordInput.setError("Password cannot be empty.");
+            passwordInputLayout.setError("Password cannot be empty.");
             isValid = false;
         } else if (password.length() < 8) {
-            passwordInput.setError("Password is too short.");
+            passwordInputLayout.setError("Password is too short.");
             isValid = false;
         }
 
