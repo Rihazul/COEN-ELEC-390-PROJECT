@@ -14,4 +14,5 @@
     <color name="dark_blue">#001F3F</color>
     <color name="light_blue">#668DAD</color>
     <color name="light_grey">#E0E0E0</color>
+    <color name="error_color">#B00020</color>
 </resources>

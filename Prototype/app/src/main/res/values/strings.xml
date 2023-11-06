@@ -33,4 +33,5 @@
     <string name="motion_sensor_data">Motion Sensor Data</string>
     <string name="alert">Alert</string>
     <string name="back_button">Back Button</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>
