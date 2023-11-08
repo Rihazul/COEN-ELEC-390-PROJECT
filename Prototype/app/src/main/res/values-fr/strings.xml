@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DoorWatch Prototype</string>
+    <string name="date">Date</string>
+    <string name="time">Heure</string>
+    <string name="cam_footage">Images de la Caméra</string>
+    <string name="connect_device">Connecter l\'Appareil</string>
+    <string name="sign_in">Connexion</string>
+    <string name="sign_up">S\'Enregistrer</string>
+    <string name="welcome_message">Bienvenue chez DoorWatch ! Votre Porte, Toujours en Vue. C\'est Parti !</string>
+    <string name="welcome_back">Bienvenue</string>
+    <string name="login_to_your_account">Connectez-Vous à Votre Compte</string>
+    <string name="enter_your_email">Entrez Votre Adresse E-mail</string>
+    <string name="enter_your_password">Entrez Votre Mot de Passe</string>
+    <string name="login">Connectez-Vous</string>
+    <string name="create_account">Créer un Compte</string>
+    <string name="enter_your_last_name">Entrez Votre Nom de Famille</string>
+    <string name="enter_your_first_name">Entrez Votre Prénom</string>
+    <string name="create_your_new_account">Créez Votre Nouveau Compte</string>
+    <string name="register">Registre</string>
+    <string name="forgot_password">Mot de Passe Oublié?</string>
+    <string name="remember_me">Souvenez-Vous de Moi</string>
+    <string name="already_have_an_account">Vous Avez Déjà un Compte?</string>
+    <string name="motion_sensor">Données du Capteur de Mouvement</string>
+    <string name="ultrasonic_sensor_data">Données du Capteur à Ultrasons</string>
+    <string name="live_alerts">Alertes en Direct</string>
+    <string name="value">Valeur</string>
+    <string name="time_header">Heure:</string>
+    <string name="date_header">Date:</string>
+    <string name="sensor_value">Valeur du Capteur:</string>
+    <string name="motion_sensor_header">Motion Sensor:</string>
+    <string name="us_sensor_header">Détecteur de Mouvement:</string>
+    <string name="us_sensor_data">Données du Capteur Ultrasonique</string>
+    <string name="motion_sensor_data">Données du Capteur de Mouvement</string>
+    <string name="alert">Alerte</string>
+    <string name="back_button">Bouton de Retour</string>
+    <string name="confirm_password">Confirmer le Mot de Passe</string>
+</resources>
