@@ -11,8 +11,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -173,6 +176,22 @@ public class SignUpActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                        mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful())
+                                {
+                                    Toast.makeText(SignUpActivity.this,"Registered Successfully. Please check your email for verification",Toast.LENGTH_LONG).show();
+                                    emailInput.setText("");
+                                    passwordInput.setText("");
+                                }
+                                else {
+                                    Toast.makeText(SignUpActivity.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+
+                                }
+                            }
+                        });
+
                         if (firebaseUser != null) {
                             DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
                             User userInfo = new User(user.getFirstName(), user.getLastName(), user.getEmail());
