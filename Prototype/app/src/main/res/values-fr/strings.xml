@@ -5,21 +5,35 @@
     <string name="time">Heure</string>
     <string name="cam_footage">Images de la Caméra</string>
     <string name="connect_device">Connecter l\'Appareil</string>
+<<<<<<< HEAD
     <string name="sign_in">Se connecter</string>
+=======
+    <string name="sign_in">Connexion</string>
+>>>>>>> origin/French-option
     <string name="sign_up">S\'Enregistrer</string>
     <string name="welcome_message">Bienvenue chez DoorWatch ! Votre Porte, Toujours en Vue. C\'est Parti !</string>
     <string name="welcome_back">Bienvenue</string>
     <string name="login_to_your_account">Connectez-Vous à Votre Compte</string>
+<<<<<<< HEAD
     <string name="enter_your_email">Entrez Votre Adresse Courriel</string>
+=======
+    <string name="enter_your_email">Entrez Votre Adresse E-mail</string>
+>>>>>>> origin/French-option
     <string name="enter_your_password">Entrez Votre Mot de Passe</string>
     <string name="login">Connectez-Vous</string>
     <string name="create_account">Créer un Compte</string>
     <string name="enter_your_last_name">Entrez Votre Nom de Famille</string>
     <string name="enter_your_first_name">Entrez Votre Prénom</string>
     <string name="create_your_new_account">Créez Votre Nouveau Compte</string>
+<<<<<<< HEAD
     <string name="register">Enregistrer</string>
     <string name="forgot_password">Mot de Passe Oublié?</string>
     <string name="remember_me">Souvenez Moi</string>
+=======
+    <string name="register">Registre</string>
+    <string name="forgot_password">Mot de Passe Oublié?</string>
+    <string name="remember_me">Souvenez-Vous de Moi</string>
+>>>>>>> origin/French-option
     <string name="already_have_an_account">Vous Avez Déjà un Compte?</string>
     <string name="motion_sensor">Données du Capteur de Mouvement</string>
     <string name="ultrasonic_sensor_data">Données du Capteur à Ultrasons</string>
