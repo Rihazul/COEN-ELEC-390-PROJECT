@@ -1,23 +1,25 @@
 package com.example.prototype;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Home {
     private String name;
-    private List<Member> members;
+    private Map<String, String> members;
 
     public Home() {
         name = "";
-        members = new ArrayList<>();
+        members = new HashMap<>();
     }
 
     public Home(String name) {
         this.name = name;
-        members = new ArrayList<>();
+        members = new HashMap<>();
     }
 
-    public Home(String name, List<Member> members) {
+    public Home(String name, Map<String, String> members) {
         this.name = name;
         this.members = members;
     }
@@ -30,15 +32,15 @@ public class Home {
         this.name = name;
     }
 
-    public List<Member> getMembers() {
+    public Map<String, String> getMembers() {
         return members;
     }
 
-    public void setMembers(List<Member> members) {
+    public void setMembers(Map<String, String> members) {
         this.members = members;
     }
 
-    public void addMember(Member member) {
-        members.add(member);
+    public void addMember(String userID, String member) {
+        members.put(userID, member);;
     }
 }
