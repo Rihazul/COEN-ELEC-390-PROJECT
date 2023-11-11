@@ -158,8 +158,8 @@ public class SignUpActivity extends AppCompatActivity {
             isValid = false;
         }
 
-        if (!user.getPassword().matches(".*[!@#$%^&*+=?-].*")) {
-            passwordInputLayout.setError("Password must contain at least one special character (!@#$%^&*+=?-).");
+        if (!user.getPassword().matches(".*[!@#$%^&*+=?~_<>-].*")) {
+            passwordInputLayout.setError("Password must contain at least one valid special character (!@#$%^&*+=?-).");
             isValid = false;
         }
 
@@ -199,7 +199,9 @@ public class SignUpActivity extends AppCompatActivity {
                             rootRef.child("users").child(firebaseUser.getUid()).setValue(userInfo)
                                     .addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
-                                            goToAddHomeActivity();
+                                            //goToAddHomeActivity();
+                                            Toast.makeText(SignUpActivity.this,"Verify the email before joining in!",Toast.LENGTH_LONG).show();
+                                            goToSignInActivity();
                                         } else {
                                             Toast.makeText(SignUpActivity.this, "Failed to save user profile information. Please try again", Toast.LENGTH_SHORT).show();
                                         }
@@ -216,11 +218,11 @@ public class SignUpActivity extends AppCompatActivity {
                 });
     }
 
-    private void goToAddHomeActivity() {
-        Intent intent = new Intent(getApplicationContext(), AddHomeActivity.class);
-        startActivity(intent);
-        finish();
-    }
+//    private void goToAddHomeActivity() {
+//        Intent intent = new Intent(getApplicationContext(), AddHomeActivity.class);
+//        startActivity(intent);
+//        finish();
+//    }
 
     private void goToSignInActivity() {
         Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
