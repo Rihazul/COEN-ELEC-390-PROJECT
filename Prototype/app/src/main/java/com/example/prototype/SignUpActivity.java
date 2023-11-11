@@ -199,7 +199,7 @@ public class SignUpActivity extends AppCompatActivity {
                             rootRef.child("users").child(firebaseUser.getUid()).setValue(userInfo)
                                     .addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
-                                            goToMainActivity();
+                                            goToAddHomeActivity();
                                         } else {
                                             Toast.makeText(SignUpActivity.this, "Failed to save user profile information. Please try again", Toast.LENGTH_SHORT).show();
                                         }
@@ -216,8 +216,8 @@ public class SignUpActivity extends AppCompatActivity {
                 });
     }
 
-    private void goToMainActivity() {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+    private void goToAddHomeActivity() {
+        Intent intent = new Intent(getApplicationContext(), AddHomeActivity.class);
         startActivity(intent);
         finish();
     }
