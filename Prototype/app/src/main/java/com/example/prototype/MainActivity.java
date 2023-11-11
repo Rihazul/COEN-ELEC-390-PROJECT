@@ -12,6 +12,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     private Button motionSensorButton;
+    private Button logoutButton;
     private Button usSensorButton;
     private Button camFootageButton;
     private Button liveAlertsButton;
@@ -23,18 +24,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        motionSensorButton = findViewById(R.id.motionSensorButton);
+        //motionSensorButton = findViewById(R.id.motionSensorButton);
+        logoutButton = findViewById(R.id.logoutButton);
         usSensorButton = findViewById(R.id.usSensorButton);
         camFootageButton = findViewById(R.id.camFootageButton);
         liveAlertsButton = findViewById(R.id.liveAlertsButton);
         connectDeviceButton = findViewById(R.id.connectDeviceButton);
 
-        motionSensorButton.setOnClickListener(new View.OnClickListener() {
+        /*motionSensorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToMotionSensorDataActivity();
             }
-        });
+        });*/
+
+        logoutButton.setOnClickListener(view -> new LogoutConfirmationDialogFragment().show(getSupportFragmentManager(), "LogoutConfirmationDialogFragment"));
 
         usSensorButton.setOnClickListener(new View.OnClickListener() {
             @Override

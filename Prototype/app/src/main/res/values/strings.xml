@@ -34,4 +34,10 @@
     <string name="alert">Alert</string>
     <string name="back_button">Back Button</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="enter_home_name">Enter Home Name</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="create_your_first_home">Create Your First Home</string>
+    <string name="add_home">Add Home</string>
+    <string name="logout">Logout</string>
 </resources>
