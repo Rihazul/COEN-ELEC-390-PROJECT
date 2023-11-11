@@ -48,7 +48,9 @@ public class AddHomeActivity extends AppCompatActivity {
             String homeName = homeNameInput.getText().toString();
             saveHome(homeName);
             if (isFirstHome) {
-                goToConnectDeviceActivity();
+                //TODO implement connect device activity
+                //goToConnectDeviceActivity();
+                goToMainActivity();
             } else {
                 goToMainActivity();
             }
@@ -85,10 +87,7 @@ public class AddHomeActivity extends AppCompatActivity {
     }
 
     private void setupUIForFirstHome(boolean isFirstHome) {
-        if (isFirstHome) {
-            cancelButton.setVisibility(View.GONE);
-
-        } else {
+        if (!isFirstHome) {
             cancelButton.setVisibility(View.VISIBLE);
             firstHomeTitle.setVisibility(View.GONE);
         }
