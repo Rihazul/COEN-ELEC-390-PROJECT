@@ -34,6 +34,7 @@
         <activity android:name=".USSensorDataActivity" />
         <activity android:name=".LiveAlertsListActivity" />
         <activity android:name=".LiveAlertsDetailsActivity" />
+        <activity android:name=".AddHomeActivity" />
 
     </application>
 

@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class AddHomeActivity extends AppCompatActivity {
 
@@ -34,6 +35,7 @@ public class AddHomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_home);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         firstHomeTitle = findViewById(R.id.createFirstHomeTitle);
         homeNameInput = findViewById(R.id.homeNameInput);
@@ -97,15 +99,13 @@ public class AddHomeActivity extends AppCompatActivity {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             String ownerUID = currentUser.getUid();
-            Member owner = new Member(ownerUID, "owner");
             DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
 
             String homeID = databaseRef.child("homes").push().getKey();
-            Home newHome = new Home(homeName);
-            newHome.addMember(owner);
+            String accessLevel = "owner";
 
             Map<String, Object> childUpdates = new HashMap<>();
-            childUpdates.put("/homes/" + homeID, newHome);
+            childUpdates.put("/homes/" + homeID + "/members/" + ownerUID, accessLevel);
 
             childUpdates.put("/users/" + ownerUID + "/homes/" + homeID, homeName);
             databaseRef.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
