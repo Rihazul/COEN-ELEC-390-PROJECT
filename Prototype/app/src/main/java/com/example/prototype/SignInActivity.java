@@ -104,7 +104,11 @@ public class SignInActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        goToMainActivity();
+                        if(mAuth.getCurrentUser().isEmailVerified())
+                            {goToMainActivity();}
+                        else {
+                            Toast.makeText(SignInActivity.this,"Please verify your email address!",Toast.LENGTH_LONG).show();
+                        }
                     } else {
                         if (task.getException() instanceof FirebaseAuthInvalidUserException) {
                             Toast.makeText(SignInActivity.this, "Account not found. Please sign up.", Toast.LENGTH_SHORT).show();

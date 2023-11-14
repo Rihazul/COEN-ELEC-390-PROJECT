@@ -11,8 +11,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -155,8 +158,8 @@ public class SignUpActivity extends AppCompatActivity {
             isValid = false;
         }
 
-        if (!user.getPassword().matches(".*[!@#$%^&*+=?-].*")) {
-            passwordInputLayout.setError("Password must contain at least one special character (!@#$%^&*+=?-).");
+        if (!user.getPassword().matches(".*[!@#$%^&*+=?~_<>-].*")) {
+            passwordInputLayout.setError("Password must contain at least one valid special character (!@#$%^&*+=?-).");
             isValid = false;
         }
 
@@ -173,6 +176,22 @@ public class SignUpActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                        mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful())
+                                {
+                                    Toast.makeText(SignUpActivity.this,"Registered Successfully. Please check your email for verification",Toast.LENGTH_LONG).show();
+                                    emailInput.setText("");
+                                    passwordInput.setText("");
+                                }
+                                else {
+                                    Toast.makeText(SignUpActivity.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+
+                                }
+                            }
+                        });
+
                         if (firebaseUser != null) {
                             DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
                             User userInfo = new User(user.getFirstName(), user.getLastName(), user.getEmail());
@@ -180,7 +199,9 @@ public class SignUpActivity extends AppCompatActivity {
                             rootRef.child("users").child(firebaseUser.getUid()).setValue(userInfo)
                                     .addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
-                                            goToAddHomeActivity();
+                                            //goToAddHomeActivity();
+                                            Toast.makeText(SignUpActivity.this,"Verify the email before joining in!",Toast.LENGTH_LONG).show();
+                                            goToSignInActivity();
                                         } else {
                                             Toast.makeText(SignUpActivity.this, "Failed to save user profile information. Please try again", Toast.LENGTH_SHORT).show();
                                         }
@@ -197,11 +218,11 @@ public class SignUpActivity extends AppCompatActivity {
                 });
     }
 
-    private void goToAddHomeActivity() {
-        Intent intent = new Intent(getApplicationContext(), AddHomeActivity.class);
-        startActivity(intent);
-        finish();
-    }
+//    private void goToAddHomeActivity() {
+//        Intent intent = new Intent(getApplicationContext(), AddHomeActivity.class);
+//        startActivity(intent);
+//        finish();
+//    }
 
     private void goToSignInActivity() {
         Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
