@@ -50,11 +50,11 @@ public class LiveAlertsListActivity extends AppCompatActivity {
         DatabaseReference motionSensorRef = FirebaseDatabase.getInstance().getReference("sensors/motionSensor");
         DatabaseReference usSensorRef = FirebaseDatabase.getInstance().getReference("sensors/usSensor");
 
-        List<LiveAlert> liveAlerts = new ArrayList<>();
-
         videosRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<LiveAlert> liveAlerts = new ArrayList<>();
+
                 for (DataSnapshot videoSnapshot : dataSnapshot.getChildren()) {
                     CameraFootage cameraFootage = videoSnapshot.getValue(CameraFootage.class);
                     if (cameraFootage != null) {
