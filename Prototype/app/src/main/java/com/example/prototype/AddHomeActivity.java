@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,10 @@ import java.util.Objects;
 
 public class AddHomeActivity extends AppCompatActivity {
 
+    interface FirstHomeCheckCallback {
+        void onCheckCompleted(boolean isFirstHome);
+    }
+
     private TextView firstHomeTitle;
     private EditText homeNameInput;
     private Button cancelButton;
@@ -37,30 +42,32 @@ public class AddHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_home);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        String source = getIntent().getStringExtra("Source");
-        if (source.equals("Sign Up")) {
-            goToMainActivity();
-        }
-
         firstHomeTitle = findViewById(R.id.createFirstHomeTitle);
         homeNameInput = findViewById(R.id.homeNameInput);
         cancelButton = findViewById(R.id.cancelButton);
         addHomeButton = findViewById(R.id.addHomeButton);
 
-        isFirstHome = determineIfFirstHome();
+        determineIfFirstHome(isFirstHome -> {
+            this.isFirstHome = isFirstHome;
 
-        setupUIForFirstHome(isFirstHome);
-
-        addHomeButton.setOnClickListener(view -> {
-            String homeName = homeNameInput.getText().toString();
-            saveHome(homeName);
-            if (isFirstHome) {
-                //TODO implement connect device activity
-                //goToConnectDeviceActivity();
-                goToMainActivity();
-            } else {
+            String source = getIntent().getStringExtra("Source");
+            if (source.equals("Sign Up") && !this.isFirstHome) {
                 goToMainActivity();
             }
+
+            setupUIForFirstHome(this.isFirstHome);
+
+            addHomeButton.setOnClickListener(view -> {
+                String homeName = homeNameInput.getText().toString();
+                saveHome(homeName);
+                if (this.isFirstHome) {
+                    //TODO implement connect device activity
+                    //goToConnectDeviceActivity();
+                    goToMainActivity();
+                } else {
+                    goToMainActivity();
+                }
+            });
         });
 
         cancelButton.setOnClickListener(view -> {
@@ -69,21 +76,17 @@ public class AddHomeActivity extends AppCompatActivity {
         });
     }
 
-    private boolean determineIfFirstHome() {
+    private void determineIfFirstHome(FirstHomeCheckCallback callback) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String uid = currentUser.getUid();
-        final boolean[] isFirstHome = {true};
         DatabaseReference userHomesRef = FirebaseDatabase.getInstance().getReference("users")
                 .child(uid).child("homes");
 
         userHomesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (!dataSnapshot.exists() || !dataSnapshot.hasChildren()) {
-                    isFirstHome[0] = true;
-                } else {
-                    isFirstHome[0] = false;
-                }
+                boolean isFirstHome = !dataSnapshot.exists() || !dataSnapshot.hasChildren();
+                callback.onCheckCompleted(isFirstHome);
             }
 
             @Override
@@ -91,7 +94,6 @@ public class AddHomeActivity extends AppCompatActivity {
                 Log.w("AddHomeActivity", "checkIfFirstHome:onCancelled", databaseError.toException());
             }
         });
-        return isFirstHome[0];
     }
 
     private void setupUIForFirstHome(boolean isFirstHome) {

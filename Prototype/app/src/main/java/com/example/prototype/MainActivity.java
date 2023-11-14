@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private Button camFootageButton;
     private Button liveAlertsButton;
     private Button connectDeviceButton;
+    private Button addHomeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
         //motionSensorButton = findViewById(R.id.motionSensorButton);
         logoutButton = findViewById(R.id.logoutButton);
-        usSensorButton = findViewById(R.id.usSensorButton);
-        camFootageButton = findViewById(R.id.camFootageButton);
+        //usSensorButton = findViewById(R.id.usSensorButton);
+        //camFootageButton = findViewById(R.id.camFootageButton);
+        addHomeButton = findViewById(R.id.addHomeButton);
         liveAlertsButton = findViewById(R.id.liveAlertsButton);
         connectDeviceButton = findViewById(R.id.connectDeviceButton);
 
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         logoutButton.setOnClickListener(view -> new LogoutConfirmationDialogFragment().show(getSupportFragmentManager(), "LogoutConfirmationDialogFragment"));
 
-        usSensorButton.setOnClickListener(new View.OnClickListener() {
+       /* usSensorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToUSSensorDataActivity();
@@ -51,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 goToCameraFootageActivity();
+            }
+        });*/
+
+        addHomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToAddHomeActivity();
             }
         });
 
@@ -93,6 +102,13 @@ public class MainActivity extends AppCompatActivity {
     private void goToConnectDeviceActivity() {
         Intent intent = new Intent(getApplicationContext(), ConnectDeviceActivity.class);
         startActivity(intent);
+    }
+
+    private void goToAddHomeActivity() {
+        Intent intent = new Intent(getApplicationContext(), AddHomeActivity.class);
+        intent.putExtra("Source", "Main");
+        startActivity(intent);
+        finish();
     }
 }
 
