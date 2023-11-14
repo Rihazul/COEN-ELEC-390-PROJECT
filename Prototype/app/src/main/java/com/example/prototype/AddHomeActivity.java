@@ -37,6 +37,11 @@ public class AddHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_home);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+        String source = getIntent().getStringExtra("Source");
+        if (source.equals("Sign Up")) {
+            goToMainActivity();
+        }
+
         firstHomeTitle = findViewById(R.id.createFirstHomeTitle);
         homeNameInput = findViewById(R.id.homeNameInput);
         cancelButton = findViewById(R.id.cancelButton);
@@ -59,6 +64,7 @@ public class AddHomeActivity extends AppCompatActivity {
         });
 
         cancelButton.setOnClickListener(view -> {
+            goToMainActivity();
             finish();
         });
     }

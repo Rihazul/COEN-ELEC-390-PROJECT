@@ -218,12 +218,6 @@ public class SignUpActivity extends AppCompatActivity {
                 });
     }
 
-//    private void goToAddHomeActivity() {
-//        Intent intent = new Intent(getApplicationContext(), AddHomeActivity.class);
-//        startActivity(intent);
-//        finish();
-//    }
-
     private void goToSignInActivity() {
         Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
         startActivity(intent);

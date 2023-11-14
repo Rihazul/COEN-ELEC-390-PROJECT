@@ -105,7 +105,7 @@ public class SignInActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         if(mAuth.getCurrentUser().isEmailVerified())
-                            {goToMainActivity();}
+                            {goToAddHomeActivity();}
                         else {
                             Toast.makeText(SignInActivity.this,"Please verify your email address!",Toast.LENGTH_LONG).show();
                         }
@@ -121,9 +121,9 @@ public class SignInActivity extends AppCompatActivity {
                 });
     }
 
-
-    private void goToMainActivity() {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+    private void goToAddHomeActivity() {
+        Intent intent = new Intent(getApplicationContext(), AddHomeActivity.class);
+        intent.putExtra("Source", "Sign Up");
         startActivity(intent);
         finish();
     }
