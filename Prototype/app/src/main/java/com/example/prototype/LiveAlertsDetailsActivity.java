@@ -20,8 +20,8 @@ public class LiveAlertsDetailsActivity extends AppCompatActivity {
     private VideoView videoView;
     private TextView dateTextView;
     private TextView timeTextView;
-    private TextView motionSensorTextView;
-    private TextView usSensorTextView;
+    //private TextView motionSensorTextView;
+    //private TextView usSensorTextView;
     private ImageButton backButton;
     private ImageView videoThumbnail;
 
@@ -46,8 +46,8 @@ public class LiveAlertsDetailsActivity extends AppCompatActivity {
         videoView = findViewById(R.id.videoView);
         dateTextView = findViewById(R.id.dateTextView);
         timeTextView = findViewById(R.id.timeTextView);
-        motionSensorTextView = findViewById(R.id.motionSensorTextView);
-        usSensorTextView = findViewById(R.id.usSensorTextView);
+        //motionSensorTextView = findViewById(R.id.motionSensorTextView);
+        //usSensorTextView = findViewById(R.id.usSensorTextView);
         backButton = findViewById(R.id.backButton);
         videoThumbnail = findViewById(R.id.videoThumbnail);
 
@@ -83,7 +83,7 @@ public class LiveAlertsDetailsActivity extends AppCompatActivity {
 
         dateTextView.setText(dateVideo);
         timeTextView.setText(timeVideo);
-        if (dateMotionSensor.equals(dateVideo) && timeMotionSensor.equals(timeVideo)) {
+        /*if (dateMotionSensor.equals(dateVideo) && timeMotionSensor.equals(timeVideo)) {
             motionSensorTextView.setText("Detected Motion");
         } else {
             motionSensorTextView.setText("Did not detect motion");
@@ -93,6 +93,6 @@ public class LiveAlertsDetailsActivity extends AppCompatActivity {
             usSensorTextView.setText("Detected Motion");
         } else {
             usSensorTextView.setText("Did not detect motion");
-        }
+        }*/
     }
 }
