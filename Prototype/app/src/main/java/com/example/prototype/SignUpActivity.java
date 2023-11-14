@@ -71,7 +71,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (validateInformation(user, confirmPassword)) {
                     saveUserInDatabase(user);
                 } else {
-                    Toast.makeText(SignUpActivity.this, "Invalid Information", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, R.string.invalid_information, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -128,43 +128,43 @@ public class SignUpActivity extends AppCompatActivity {
         boolean isValid = true;
 
         if (user.getFirstName().isEmpty() || user.getLastName().isEmpty()) {
-            firstNameInput.setError("Name can not be empty!");
-            lastNameInput.setError("Name can not be empty!");
+            firstNameInput.setError(getString(R.string.name_can_not_be_empty));
+            lastNameInput.setError(getString(R.string.name_can_not_be_empty));
             isValid =  false;
         }
 
         if (!user.getEmail().matches(emailPattern)) {
-            emailInput.setError("Please enter a valid email address!");
+            emailInput.setError(getString(R.string.please_enter_a_valid_email_address));
             isValid = false;
         }
 
         if (user.getPassword().length() < 8) {
-            passwordInputLayout.setError("Password must be at least 8 characters");
+            passwordInputLayout.setError(getString(R.string.password_must_be_at_least_8_characters));
             isValid = false;
         }
 
         if (!user.getPassword().matches(".*[0-9].*")) {
-            passwordInputLayout.setError("Password must contain at least one digit.");
+            passwordInputLayout.setError(getString(R.string.password_must_contain_at_least_one_digit));
             isValid = false;
         }
 
         if (!user.getPassword().matches(".*[A-Z].*")) {
-            passwordInputLayout.setError("Password must contain at least one uppercase letter.");
+            passwordInputLayout.setError(getString(R.string.password_must_contain_at_least_one_uppercase_letter));
             isValid = false;
         }
 
         if (!user.getPassword().matches(".*[a-z].*")) {
-            passwordInputLayout.setError("Password must contain at least one lowercase letter.");
+            passwordInputLayout.setError(getString(R.string.password_must_contain_at_least_one_lowercase_letter));
             isValid = false;
         }
 
         if (!user.getPassword().matches(".*[!@#$%^&*+=?~_<>-].*")) {
-            passwordInputLayout.setError("Password must contain at least one valid special character (!@#$%^&*+=?-).");
+            passwordInputLayout.setError(getString(R.string.password_must_contain_at_least_one_valid_special_character));
             isValid = false;
         }
 
         if (!user.getPassword().equals(confirmPassword)) {
-            confirmPasswordInputLayout.setError("Passwords do not match.");
+            confirmPasswordInputLayout.setError(getString(R.string.passwords_do_not_match));
              isValid = false;
         }
 
@@ -181,7 +181,7 @@ public class SignUpActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful())
                                 {
-                                    Toast.makeText(SignUpActivity.this,"Registered Successfully. Please check your email for verification",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SignUpActivity.this, R.string.registered_successfully_please_check_your_email_for_verification,Toast.LENGTH_LONG).show();
                                     emailInput.setText("");
                                     passwordInput.setText("");
                                 }
@@ -200,19 +200,19 @@ public class SignUpActivity extends AppCompatActivity {
                                     .addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
                                             //goToAddHomeActivity();
-                                            Toast.makeText(SignUpActivity.this,"Verify the email before joining in!",Toast.LENGTH_LONG).show();
+                                            Toast.makeText(SignUpActivity.this, R.string.verify_the_email_before_joining_in,Toast.LENGTH_LONG).show();
                                             goToSignInActivity();
                                         } else {
-                                            Toast.makeText(SignUpActivity.this, "Failed to save user profile information. Please try again", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(SignUpActivity.this, R.string.failed_to_save_user_profile_information_please_try_again, Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         }
                     } else {
                         if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                            emailInput.setError("An account with this email already exists!");
-                            Toast.makeText(SignUpActivity.this, "An account with this email already exists.", Toast.LENGTH_SHORT).show();
+                            emailInput.setError(getString(R.string.an_account_with_this_email_already_exists));
+                            Toast.makeText(SignUpActivity.this, R.string.an_account_with_this_email_already_exists, Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(SignUpActivity.this, "Authentication failed. " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, R.string.authentication_failed + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

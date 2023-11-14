@@ -52,7 +52,7 @@ public class SignInActivity extends AppCompatActivity {
                 if (validateLoginInformation(email, password)) {
                     signInUser(email, password);
                 } else {
-                    Toast.makeText(SignInActivity.this, "Please enter valid email and password", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignInActivity.this, R.string.please_enter_valid_email_and_password, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -82,18 +82,18 @@ public class SignInActivity extends AppCompatActivity {
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
         if (email.isEmpty()) {
-            emailInput.setError("Email cannot be empty.");
+            emailInput.setError(getString(R.string.email_cannot_be_empty));
             isValid = false;
         } else if (!email.matches(emailPattern)) {
-            emailInput.setError("Please enter a valid email address.");
+            emailInput.setError(getString(R.string.please_enter_a_valid_email_address));
             isValid = false;
         }
 
         if (password.isEmpty()) {
-            passwordInputLayout.setError("Password cannot be empty.");
+            passwordInputLayout.setError(getString(R.string.password_cannot_be_empty));
             isValid = false;
         } else if (password.length() < 8) {
-            passwordInputLayout.setError("Password is too short.");
+            passwordInputLayout.setError(getString(R.string.password_is_too_short));
             isValid = false;
         }
 
@@ -107,15 +107,15 @@ public class SignInActivity extends AppCompatActivity {
                         if(mAuth.getCurrentUser().isEmailVerified())
                             {goToAddHomeActivity();}
                         else {
-                            Toast.makeText(SignInActivity.this,"Please verify your email address!",Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignInActivity.this, R.string.please_verify_your_email_address, Toast.LENGTH_LONG).show();
                         }
                     } else {
                         if (task.getException() instanceof FirebaseAuthInvalidUserException) {
-                            Toast.makeText(SignInActivity.this, "Account not found. Please sign up.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignInActivity.this, R.string.account_not_found_please_sign_up, Toast.LENGTH_SHORT).show();
                         } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                            Toast.makeText(SignInActivity.this, "Invalid credentials. Please try again.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignInActivity.this, R.string.invalid_credentials_please_try_again, Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(SignInActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignInActivity.this, R.string.authentication_failed, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
