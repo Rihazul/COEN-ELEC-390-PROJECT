@@ -36,4 +36,49 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <TextView
+        android:id="@+id/connectDeviceInstruction"
+        android:layout_width="325dp"
+        android:layout_height="80dp"
+        android:text="@string/connect_your_device_by_entering_the_code_found_on_the_back_of_the_camera"
+        android:textColor="@color/deep_navy_blue"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintVertical_bias="0.086" />
+
+    <EditText
+        android:id="@+id/deviceCodeInput"
+        android:layout_width="325dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_background"
+        android:hint="@string/enter_device_code"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:errorTextColor="@color/error_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/connectDeviceInstruction"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/connectDeviceButton"
+        android:layout_width="325dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="128dp"
+        android:background="@drawable/button_gradient"
+        android:backgroundTint="@null"
+        android:text="@string/connect_device"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deviceCodeInput"
+        app:layout_constraintVertical_bias="0.632" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,15 +2,24 @@ package com.example.prototype;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
 public class ConnectDeviceActivity extends AppCompatActivity {
 
     private ImageButton backButton;
+    private EditText deviceCodeInput;
+    private Button connectDeviceButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +27,23 @@ public class ConnectDeviceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_connect_device);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+        deviceCodeInput = findViewById(R.id.deviceCodeInput);
+        connectDeviceButton = findViewById(R.id.connectDeviceButton);
         backButton = findViewById(R.id.backButton);
 
+        connectDeviceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    String userId = user.getUid();
+                    String deviceId = deviceCodeInput.getText().toString();
+
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                    ref.child("devices").child(userId).child("-NjBDdiPuPmrqUlTS_WB").child(deviceId).setValue(true);
+                }
+            }
+        });
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
