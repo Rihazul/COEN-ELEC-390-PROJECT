@@ -1,16 +1,28 @@
 package com.example.prototype;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private ActionBarDrawerToggle drawerToggle;
     private Button motionSensorButton;
     private Button logoutButton;
     private Button usSensorButton;
@@ -32,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         addHomeButton = findViewById(R.id.addHomeButton);
         liveAlertsButton = findViewById(R.id.liveAlertsButton);
         connectDeviceButton = findViewById(R.id.connectDeviceButton);
+
 
         /*motionSensorButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 }
 
 

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">DoorWatch Prototype</string>
+    <string name="open">Open Navigation Drawer</string>
+    <string name="close">Close Navigation Drawer</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="cam_footage">Camera Footage</string>
