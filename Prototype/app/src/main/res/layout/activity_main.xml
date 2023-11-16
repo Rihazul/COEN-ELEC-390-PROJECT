@@ -21,21 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.15" />-->
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/logoutButton"
-        android:layout_width="325dp"
-        android:layout_height="55dp"
-        android:background="@drawable/button_gradient"
-        android:backgroundTint="@null"
-        android:text="@string/logout"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
-
-    <androidx.appcompat.widget.AppCompatButton
+    <!--<androidx.appcompat.widget.AppCompatButton
         android:id="@+id/usSensorButton"
         android:layout_width="325dp"
         android:layout_height="55dp"
@@ -47,9 +33,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logoutButton"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintVertical_bias="0.117" />-->
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/logoutButton"
+        android:layout_width="325dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/button_gradient"
+        android:backgroundTint="@null"
+        android:text="@string/logout"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.104" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addHomeButton"
+        android:layout_width="325dp"
+        android:layout_height="55dp"
+        android:background="@drawable/button_gradient"
+        android:backgroundTint="@null"
+        android:text="@string/add_home"
+        android:textColor="@color/white"
+        android:layout_marginTop="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoutButton"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!--<androidx.appcompat.widget.AppCompatButton
         android:id="@+id/camFootageButton"
         android:layout_width="325dp"
         android:layout_height="55dp"
@@ -60,8 +76,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usSensorButton"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintTop_toBottomOf="@+id/addHomeButton"
+        app:layout_constraintVertical_bias="0.15" />-->
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/liveAlertsButton"
@@ -71,11 +87,12 @@
         android:backgroundTint="@null"
         android:text="@string/live_alerts"
         android:textColor="@color/white"
+        android:layout_marginTop="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/camFootageButton"
-        app:layout_constraintVertical_bias="0.201" />
+        app:layout_constraintTop_toBottomOf="@+id/addHomeButton"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/connectDeviceButton"
@@ -85,10 +102,11 @@
         android:backgroundTint="@null"
         android:text="@string/connect_device"
         android:textColor="@color/white"
+        android:layout_marginTop="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/liveAlertsButton"
-        app:layout_constraintVertical_bias="0.354" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,4 +40,27 @@
     <string name="create_your_first_home">Create Your First Home</string>
     <string name="add_home">Add Home</string>
     <string name="logout">Logout</string>
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="please_enter_valid_email_and_password">Please enter valid email and password</string>
+    <string name="email_cannot_be_empty">Email cannot be empty.</string>
+    <string name="please_enter_a_valid_email_address">Please enter a valid email address.</string>
+    <string name="password_cannot_be_empty">Password cannot be empty.</string>
+    <string name="password_is_too_short">Password is too short.</string>
+    <string name="please_verify_your_email_address">Please verify your email address!</string>
+    <string name="account_not_found_please_sign_up">Account not found. Please sign up.</string>
+    <string name="invalid_credentials_please_try_again">Invalid credentials. Please try again.</string>
+    <string name="authentication_failed">Authentication failed.</string>
+    <string name="invalid_information">Invalid Information</string>
+    <string name="name_can_not_be_empty">Name can not be empty!</string>
+    <string name="password_must_be_at_least_8_characters">Password must be at least 8 characters</string>
+    <string name="password_must_contain_at_least_one_digit">Password must contain at least one digit.</string>
+    <string name="password_must_contain_at_least_one_uppercase_letter">Password must contain at least one uppercase letter.</string>
+    <string name="password_must_contain_at_least_one_lowercase_letter">Password must contain at least one lowercase letter.</string>
+    <string name="password_must_contain_at_least_one_valid_special_character"><![CDATA[Password must contain at least one valid special character (!@#$%^&*+=?-).]]></string>
+    <string name="passwords_do_not_match">Passwords do not match.</string>
+    <string name="registered_successfully_please_check_your_email_for_verification">Registered Successfully. Please check your email for verification</string>
+    <string name="verify_the_email_before_joining_in">Verify the email before joining in!</string>
+    <string name="failed_to_save_user_profile_information_please_try_again">Failed to save user profile information. Please try again</string>
+    <string name="an_account_with_this_email_already_exists">An account with this email already exists!</string>
 </resources>

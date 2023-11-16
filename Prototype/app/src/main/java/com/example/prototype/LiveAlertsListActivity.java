@@ -23,6 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Locale;
+
 public class LiveAlertsListActivity extends AppCompatActivity {
 
     private ImageButton backButton;
@@ -50,11 +57,11 @@ public class LiveAlertsListActivity extends AppCompatActivity {
         DatabaseReference motionSensorRef = FirebaseDatabase.getInstance().getReference("sensors/motionSensor");
         DatabaseReference usSensorRef = FirebaseDatabase.getInstance().getReference("sensors/usSensor");
 
-        List<LiveAlert> liveAlerts = new ArrayList<>();
-
         videosRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<LiveAlert> liveAlerts = new ArrayList<>();
+
                 for (DataSnapshot videoSnapshot : dataSnapshot.getChildren()) {
                     CameraFootage cameraFootage = videoSnapshot.getValue(CameraFootage.class);
                     if (cameraFootage != null) {
@@ -100,6 +107,7 @@ public class LiveAlertsListActivity extends AppCompatActivity {
                         liveAlerts.add(liveAlert);
                     }
                 }
+                Collections.sort(liveAlerts, liveAlertComparator);
                 setupRecyclerView(liveAlerts);
             }
 
@@ -120,4 +128,19 @@ public class LiveAlertsListActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(liveAlertsAdapter);
     }
+
+    private Comparator<LiveAlert> liveAlertComparator = new Comparator<LiveAlert>() {
+        @Override
+        public int compare(LiveAlert alert1, LiveAlert alert2) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            try {
+                Date date1 = format.parse(alert1.getVideo().getDate() + " " + alert1.getVideo().getTime());
+                Date date2 = format.parse(alert2.getVideo().getDate() + " " + alert2.getVideo().getTime());
+                return date2.compareTo(date1);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return 0;
+            }
+        }
+    };
 }

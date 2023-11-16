@@ -35,4 +35,33 @@
     <string name="alert">Alerte</string>
     <string name="back_button">Bouton de Retour</string>
     <string name="confirm_password">Confirmer le Mot de Passe</string>
+    <string name="enter_home_name">Entrer le nom de la maison</string>
+    <string name="cancel">Annuler</string>
+    <string name="add">Ajouter</string>
+    <string name="create_your_first_home">Crée votre première maison</string>
+    <string name="add_home">Ajouter Maison</string>
+    <string name="logout">Quitter</string>
+    <string name="are_you_sure_you_want_to_logout">Êtes-vous sûr de quitter la session?</string>
+    <string name="yes">Oui</string>
+    <string name="please_enter_valid_email_and_password">SVP enter l'addresse courriel et le mot de passe valide</string>
+    <string name="email_cannot_be_empty">Address Courriel ne peut pas être vide.</string>
+    <string name="please_enter_a_valid_email_address">SVP veuiller entrer l'addresse courriel valide.</string>
+    <string name="password_cannot_be_empty">Mot de passe ne peut pas être vide.</string>
+    <string name="password_is_too_short">Mot de passe très court.</string>
+    <string name="please_verify_your_email_address">SVP veuiller vérifier votre addresse courriel!</string>
+    <string name="account_not_found_please_sign_up">Compte non trouvé. Veuillez Enregistrer.</string>
+    <string name="invalid_credentials_please_try_again">Identité non-valide. Veullez recommencer.</string>
+    <string name="authentication_failed">Authentification en échec.</string>
+    <string name="invalid_information">Information non-valide</string>
+    <string name="name_can_not_be_empty">Le nom ne peut pas être vide!</string>
+    <string name="password_must_be_at_least_8_characters">Le mot de passe doit contenir au moins 8 charactères.</string>
+    <string name="password_must_contain_at_least_one_digit">Le mot de passe doit contenir au moins un chiffre.</string>
+    <string name="password_must_contain_at_least_one_uppercase_letter">Le mot de passe doit contenir au moins une lettre MAJUSCULE.</string>
+    <string name="password_must_contain_at_least_one_lowercase_letter">Le mot de passe doit contenir au moins une lettre minuscule.</string>
+    <string name="password_must_contain_at_least_one_valid_special_character"><![CDATA[Le mot de passe doit contenir au moins un charactère spécial (!@#$%^&*+=?-).]]></string>
+    <string name="passwords_do_not_match">Le mot de passe ne correspond pas.</string>
+    <string name="registered_successfully_please_check_your_email_for_verification">Enregistré avec succès. Veuiller vérifier votre addresse courriel.</string>
+    <string name="verify_the_email_before_joining_in">Vérifier votre addresse courriel avant de joindre!</string>
+    <string name="failed_to_save_user_profile_information_please_try_again">Échec de l'enregistrement des informations du profil utilisateur. Veuillez réessayer</string>
+    <string name="an_account_with_this_email_already_exists">Un compte associé avec cet addresse courriel exist!</string>
 </resources>

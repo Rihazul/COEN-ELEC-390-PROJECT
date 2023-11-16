@@ -17,12 +17,12 @@ public class LogoutConfirmationDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         return new AlertDialog.Builder(requireContext())
-                .setMessage("Are you sure you want to logout?")
-                .setPositiveButton("Yes", (dialog, which) -> {
+                .setMessage(R.string.are_you_sure_you_want_to_logout)
+                .setPositiveButton(R.string.yes, (dialog, which) -> {
                     FirebaseAuth.getInstance().signOut();
                     goToStartActivity();
                 } )
-                .setNegativeButton("Cancel", (dialog, which) -> {})
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {})
                 .create();
     }
 
