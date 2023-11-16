@@ -71,7 +71,7 @@ public class SignInActivity extends AppCompatActivity {
         forgotPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO add a forgot password option
+                setForgotPasswordActivity();
             }
         });
     }
@@ -124,6 +124,12 @@ public class SignInActivity extends AppCompatActivity {
     private void goToAddHomeActivity() {
         Intent intent = new Intent(getApplicationContext(), AddHomeActivity.class);
         intent.putExtra("Source", "Sign Up");
+        startActivity(intent);
+        finish();
+    }
+
+    private void setForgotPasswordActivity(){
+        Intent intent= new Intent(getApplicationContext(),ForgetPassword.class);
         startActivity(intent);
         finish();
     }
