@@ -8,7 +8,12 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Objects;
-
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 public class MainActivity extends AppCompatActivity {
 
     private Button motionSensorButton;
@@ -94,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), ConnectDeviceActivity.class);
         startActivity(intent);
     }
+
+
 }
 
 
