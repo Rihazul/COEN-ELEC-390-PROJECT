@@ -29,7 +29,8 @@
         <activity android:name=".CameraFootageActivity" />
         <activity android:name=".CameraFootageDetailsActivity" />
         <activity android:name=".ConnectDeviceActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme"/>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".MotionSensorDataActivity" />

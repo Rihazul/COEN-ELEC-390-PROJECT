@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-    <group android:checkableBehavior="single">
+   <!-- <group android:checkableBehavior="single">
         <item android:id="@+id/home"
          android:title="Home"
          />
@@ -13,12 +13,27 @@
         <item android:id="@+id/gallery"
             android:title="Gallery"
             />
-    </group>
+    </group>-->
+    <item android:title="Home Management">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item android:id="@+id/homeSettings"
+                    android:title="Manage Homes"
+                    />
+                <item android:id="@+id/addHome"
+                    android:title="@string/add_home"
+                    />
+            </group>
+        </menu>
+    </item>
     <item android:title="Profile">
         <menu>
             <group android:checkableBehavior="single">
-                <item android:title="About"
-                    android:id="@+id/about"
+                <item android:title="Profile Information"
+                    android:id="@+id/profileInformation"
+                    />
+                <item android:id="@+id/settings"
+                    android:title="Settings"
                     />
                 <item android:id="@+id/logout"
                     android:title="Logout"
@@ -26,7 +41,7 @@
             </group>
         </menu>
     </item>
-    <item android:title="Communication">
+   <!-- <item android:title="Communication">
         <menu>
             <group android:checkableBehavior="single">
                 <item android:title="Share"
@@ -37,9 +52,5 @@
                     />
             </group>
         </menu>
-    </item>
-
-
-
-
+    </item>-->
 </menu>

@@ -65,4 +65,6 @@
     <string name="verify_the_email_before_joining_in">Verify the email before joining in!</string>
     <string name="failed_to_save_user_profile_information_please_try_again">Failed to save user profile information. Please try again</string>
     <string name="an_account_with_this_email_already_exists">An account with this email already exists!</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
 </resources>

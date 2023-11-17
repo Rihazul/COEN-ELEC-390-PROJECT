@@ -6,23 +6,24 @@
     android:padding="20dp"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:background="#1DACD6">
+    android:background="@color/teal_700">
 
     <TextView
+        android:id="@+id/navHeaderUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your name"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="30dp"
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/navHeaderUserEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your email"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="18dp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
 </LinearLayout>
