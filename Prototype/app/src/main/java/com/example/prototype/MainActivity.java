@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +18,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,6 +31,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
@@ -32,9 +41,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle drawerToggle;
     private Toolbar toolbar;
     private Button liveAlertsButton;
-    private Button connectDeviceButton;
+    private FloatingActionButton connectDeviceButton;
     private TextView userNameTextView;
     private TextView userEmailTextView;
+    private RecyclerView devicesRecyclerView;
+    private DevicesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +54,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -54,8 +69,65 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        liveAlertsButton = findViewById(R.id.liveAlertsButton);
+        //liveAlertsButton = findViewById(R.id.liveAlertsButton);
         connectDeviceButton = findViewById(R.id.connectDeviceButton);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference usersRef = database.getReference("users");
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String uid = user.getUid();
+            DatabaseReference homesRef = usersRef.child(uid).child("homes");
+
+            homesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<String> homeNamesList = new ArrayList<>();
+                    ArrayList<String> homeIdsList = new ArrayList<>();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        String homeName = snapshot.getValue(String.class);
+                        String homeId = snapshot.getKey();
+                        homeNamesList.add(homeName);
+                        homeIdsList.add(homeId);
+                    }
+                    Spinner spinner = findViewById(R.id.spinner);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, R.layout.spinner_item, homeNamesList);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(adapter);
+
+                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            String selectedHomeId = homeIdsList.get(position);
+                            fetchDevicesForHome(selectedHomeId);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+        }
+
+        devicesRecyclerView = findViewById(R.id.devicesRecyclerView);
+        devicesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+        adapter = new DevicesAdapter(this, new ArrayList<>(), new DevicesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                String deviceName = adapter.getDeviceNameAtPosition(position);
+                goToLiveAlertsActivity();
+            }
+        });
+
+
+        devicesRecyclerView.setAdapter(adapter);
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
@@ -87,12 +159,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
         }
 
-        liveAlertsButton.setOnClickListener(new View.OnClickListener() {
+        /*liveAlertsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToLiveAlertsActivity();
             }
-        });
+        });*/
 
         connectDeviceButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,19 +219,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void goToMotionSensorDataActivity() {
-        Intent intent = new Intent(getApplicationContext(), MotionSensorDataActivity.class);
-        startActivity(intent);
-    }
+    private void fetchDevicesForHome(String homeId) {
+        DatabaseReference devicesRef = FirebaseDatabase.getInstance().getReference("homes").child(homeId).child("devices");
+        devicesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> deviceNamesList = new ArrayList<>();
+                for (DataSnapshot deviceSnapshot : dataSnapshot.getChildren()) {
+                    String deviceName = deviceSnapshot.getKey();
+                    deviceNamesList.add(deviceName);
+                }
+                adapter.updateDevicesList(deviceNamesList);
+            }
 
-    private void goToUSSensorDataActivity() {
-        Intent intent = new Intent(getApplicationContext(), USSensorDataActivity.class);
-        startActivity(intent);
-    }
-
-    private void goToCameraFootageActivity() {
-        Intent intent = new Intent(getApplicationContext(), CameraFootageActivity.class);
-        startActivity(intent);
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("MainActivity", "loadDevices:onCancelled", databaseError.toException());
+            }
+        });
     }
 
     private void goToLiveAlertsActivity() {

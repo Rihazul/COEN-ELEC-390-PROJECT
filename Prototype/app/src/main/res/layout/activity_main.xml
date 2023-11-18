@@ -24,9 +24,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+
         </androidx.appcompat.widget.Toolbar>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <!--<androidx.appcompat.widget.AppCompatButton
             android:id="@+id/liveAlertsButton"
             android:layout_width="325dp"
             android:layout_height="55dp"
@@ -38,22 +45,38 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:layout_constraintVertical_bias="0.237" />
+            app:layout_constraintVertical_bias="0.237" />-->
 
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/devicesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="577dp"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:padding="4dp"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintVertical_bias="0.094" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/connectDeviceButton"
             android:layout_width="325dp"
             android:layout_height="55dp"
-            android:background="@drawable/button_gradient"
-            android:backgroundTint="@null"
             android:text="@string/connect_device"
             android:textColor="@color/white"
-            android:layout_marginTop="64dp"
+            app:backgroundTint="@color/teal_700"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.91"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/liveAlertsButton"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/devicesRecyclerView"
+            app:layout_constraintVertical_bias="0.407"
+            app:srcCompat="@android:drawable/ic_input_add"
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
