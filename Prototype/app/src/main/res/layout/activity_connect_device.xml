@@ -67,6 +67,16 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonScan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan QR Code"
+        app:layout_constraintBottom_toTopOf="@+id/connectDeviceButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deviceCodeInput" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/connectDeviceButton"
         android:layout_width="325dp"
         android:layout_height="55dp"

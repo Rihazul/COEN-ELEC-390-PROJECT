@@ -1,10 +1,12 @@
 package com.example.prototype;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +14,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.Objects;
 
@@ -20,6 +24,7 @@ public class ConnectDeviceActivity extends AppCompatActivity {
     private ImageButton backButton;
     private EditText deviceCodeInput;
     private Button connectDeviceButton;
+    private Button buttonScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,17 @@ public class ConnectDeviceActivity extends AppCompatActivity {
         deviceCodeInput = findViewById(R.id.deviceCodeInput);
         connectDeviceButton = findViewById(R.id.connectDeviceButton);
         backButton = findViewById(R.id.backButton);
+        buttonScan = findViewById(R.id.buttonScan);
+        buttonScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator integrator = new IntentIntegrator(ConnectDeviceActivity.this);
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+                integrator.setPrompt("Scan a QR code");
+                integrator.initiateScan();
+            }
+        });
+
 
         connectDeviceButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,4 +67,27 @@ public class ConnectDeviceActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            if (result.getContents() == null) {
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    String userId = user.getUid();
+                    String deviceId = result.getContents();
+
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                    ref.child("homes").child("-NjAeWEplJDWqo5O4SW3").child("devices").child(deviceId).setValue("Device ID with QR code");
+                }
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
 }

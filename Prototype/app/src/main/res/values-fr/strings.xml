@@ -43,9 +43,9 @@
     <string name="logout">Quitter</string>
     <string name="are_you_sure_you_want_to_logout">Êtes-vous sûr de quitter la session?</string>
     <string name="yes">Oui</string>
-    <string name="please_enter_valid_email_and_password">SVP enter l'addresse courriel et le mot de passe valide</string>
+    <string name="please_enter_valid_email_and_password">SVP enter l\'addresse courriel et le mot de passe valide</string>
     <string name="email_cannot_be_empty">Address Courriel ne peut pas être vide.</string>
-    <string name="please_enter_a_valid_email_address">SVP veuiller entrer l'addresse courriel valide.</string>
+    <string name="please_enter_a_valid_email_address">SVP veuiller entrer l\'addresse courriel valide.</string>
     <string name="password_cannot_be_empty">Mot de passe ne peut pas être vide.</string>
     <string name="password_is_too_short">Mot de passe très court.</string>
     <string name="please_verify_your_email_address">SVP veuiller vérifier votre addresse courriel!</string>
@@ -62,6 +62,6 @@
     <string name="passwords_do_not_match">Le mot de passe ne correspond pas.</string>
     <string name="registered_successfully_please_check_your_email_for_verification">Enregistré avec succès. Veuiller vérifier votre addresse courriel.</string>
     <string name="verify_the_email_before_joining_in">Vérifier votre addresse courriel avant de joindre!</string>
-    <string name="failed_to_save_user_profile_information_please_try_again">Échec de l'enregistrement des informations du profil utilisateur. Veuillez réessayer</string>
+    <string name="failed_to_save_user_profile_information_please_try_again">Échec de l\'enregistrement des informations du profil utilisateur. Veuillez réessayer</string>
     <string name="an_account_with_this_email_already_exists">Un compte associé avec cet addresse courriel exist!</string>
 </resources>
