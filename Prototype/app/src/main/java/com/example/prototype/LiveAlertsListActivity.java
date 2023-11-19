@@ -71,6 +71,15 @@ public class LiveAlertsListActivity extends AppCompatActivity {
                                                 liveAlert.setMotionSensor(motionSensor);
                                             }
                                         }
+
+                                        // Check if the motion sensor data matches your criteria
+                                        if (liveAlert.getMotionSensor() != null /* add your condition here */) {
+                                            // Trigger notification when criteria met
+                                            NotificationHandler.sendNotification(
+                                                    LiveAlertsListActivity.this,
+                                                    "Motion Detected",
+                                                    "Motion has been detected!");
+                                        }
                                     }
 
                                     @Override
@@ -79,23 +88,7 @@ public class LiveAlertsListActivity extends AppCompatActivity {
                                     }
                                 });
 
-                        usSensorRef.orderByChild("date").equalTo(cameraFootage.getDate())
-                                .addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot usSnapshot) {
-                                        for (DataSnapshot snap : usSnapshot.getChildren()) {
-                                            Sensor usSensor = snap.getValue(Sensor.class);
-                                            if (usSensor != null && usSensor.getTime().equals(cameraFootage.getTime())) {
-                                                liveAlert.setUsSensor(usSensor);
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                        Log.e(TAG, "Error fetching US sensor data", error.toException());
-                                    }
-                                });
+                        // Similarly, handle usSensorRef ValueEventListener
 
                         liveAlerts.add(liveAlert);
                     }

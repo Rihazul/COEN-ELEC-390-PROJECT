@@ -65,8 +65,6 @@ public class NotificationHandler {
     }
 
     private static void showNotificationPermissionExplanation(Context context) {
-        // Show a message/dialog explaining why the notification permission is needed
-        // Here is an example of a toast message directing the user to the app's notification settings
 
         Toast.makeText(context, "Please enable notifications for this app in the device settings", Toast.LENGTH_LONG).show();
 
