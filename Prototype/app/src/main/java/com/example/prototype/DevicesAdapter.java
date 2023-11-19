@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,10 +42,12 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
 
     public static class DeviceViewHolder extends RecyclerView.ViewHolder {
         public Button deviceButton;
+        public ImageButton powerButton;
 
         public DeviceViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             deviceButton = itemView.findViewById(R.id.deviceButton);
+            powerButton = itemView.findViewById(R.id.powerButton);
             deviceButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -52,6 +55,13 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
                     if (position != RecyclerView.NO_POSITION) {
                         listener.onItemClick(position);
                     }
+                }
+            });
+
+            powerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //TODO close the device (set it to sleep)
                 }
             });
         }

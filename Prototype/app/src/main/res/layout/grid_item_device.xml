@@ -8,22 +8,40 @@
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/deviceButton"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        style="@style/RoundedFloatingButton"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:elevation="4dp"
-        android:text="Device"
-        android:foreground="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"/>
-        <!--android:textColor="@color/black"
-        android:padding="16dp"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true" -->
-    <!--style="@style/RoundedFloatingButton"-->
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/deviceButton"
+            style="@style/RoundedFloatingButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:elevation="4dp"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="Device"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_gravity="end|top">
+
+        <ImageButton
+            android:id="@+id/powerButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/power_button_ripple"
+            android:padding="8dp"
+            android:src="@android:drawable/ic_lock_power_off"
+            app:tint="@color/black"
+            app:elevation="0dp" />
+    </FrameLayout>
+
 </com.google.android.material.card.MaterialCardView>
