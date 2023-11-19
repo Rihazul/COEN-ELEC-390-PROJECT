@@ -51,6 +51,7 @@ public class LiveAlertsListActivity extends AppCompatActivity {
         DatabaseReference usSensorRef = FirebaseDatabase.getInstance().getReference("sensors/usSensor");
 
         List<LiveAlert> liveAlerts = new ArrayList<>();
+        CameraFootage[] previousCameraFootage = {null};
 
         videosRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -58,8 +59,18 @@ public class LiveAlertsListActivity extends AppCompatActivity {
                 for (DataSnapshot videoSnapshot : dataSnapshot.getChildren()) {
                     CameraFootage cameraFootage = videoSnapshot.getValue(CameraFootage.class);
                     if (cameraFootage != null) {
+                        if (previousCameraFootage[0] != null && !cameraFootage.equals(previousCameraFootage[0])) {
+                            // Trigger notification when criteria met (value changed)
+                            NotificationHandler.sendNotification(
+                                    LiveAlertsListActivity.this,
+                                    "CameraFootage Changed",
+                                    "Camera footage has changed!");
+                        }
+                        previousCameraFootage[0] = cameraFootage; // Update array value
+
                         LiveAlert liveAlert = new LiveAlert();
                         liveAlert.setVideo(cameraFootage);
+
 
                         motionSensorRef.orderByChild("date").equalTo(cameraFootage.getDate())
                                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -69,16 +80,16 @@ public class LiveAlertsListActivity extends AppCompatActivity {
                                             Sensor motionSensor = snap.getValue(Sensor.class);
                                             if (motionSensor != null && motionSensor.getTime().equals(cameraFootage.getTime())) {
                                                 liveAlert.setMotionSensor(motionSensor);
-                                            }
-                                        }
 
-                                        // Check if the motion sensor data matches your criteria
-                                        if (liveAlert.getMotionSensor() != null /* add your condition here */) {
-                                            // Trigger notification when criteria met
-                                            NotificationHandler.sendNotification(
-                                                    LiveAlertsListActivity.this,
-                                                    "Motion Detected",
-                                                    "Motion has been detected!");
+
+                                                if (!cameraFootage.equals(previousCameraFootage[0])) {
+
+                                                    NotificationHandler.sendNotification(
+                                                            LiveAlertsListActivity.this,
+                                                            "Video Footage Changed",
+                                                            "Video footage has been updated!");
+                                                }
+                                            }
                                         }
                                     }
 
@@ -88,7 +99,6 @@ public class LiveAlertsListActivity extends AppCompatActivity {
                                     }
                                 });
 
-                        // Similarly, handle usSensorRef ValueEventListener
 
                         liveAlerts.add(liveAlert);
                     }
@@ -102,6 +112,7 @@ public class LiveAlertsListActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void setupRecyclerView(List<LiveAlert> liveAlerts) {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
