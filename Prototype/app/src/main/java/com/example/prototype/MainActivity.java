@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<String> deviceNamesList = new ArrayList<>();
                 for (DataSnapshot deviceSnapshot : dataSnapshot.getChildren()) {
-                    String deviceName = deviceSnapshot.getKey();
+                    String deviceName = deviceSnapshot.getValue(String.class);
                     deviceNamesList.add(deviceName);
                 }
                 adapter.updateDevicesList(deviceNamesList);
