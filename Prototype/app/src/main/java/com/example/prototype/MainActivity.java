@@ -1,74 +1,170 @@
 package com.example.prototype;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Objects;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
 
-    private Button motionSensorButton;
-    private Button logoutButton;
-    private Button usSensorButton;
-    private Button camFootageButton;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private ActionBarDrawerToggle drawerToggle;
+    private Toolbar toolbar;
     private Button liveAlertsButton;
-    private Button connectDeviceButton;
-    private Button addHomeButton;
+    private FloatingActionButton connectDeviceButton;
+    private TextView userNameTextView;
+    private TextView userEmailTextView;
+    private RecyclerView devicesRecyclerView;
+    private DevicesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Objects.requireNonNull(getSupportActionBar()).hide();
 
-        //motionSensorButton = findViewById(R.id.motionSensorButton);
-        logoutButton = findViewById(R.id.logoutButton);
-        //usSensorButton = findViewById(R.id.usSensorButton);
-        //camFootageButton = findViewById(R.id.camFootageButton);
-        addHomeButton = findViewById(R.id.addHomeButton);
-        liveAlertsButton = findViewById(R.id.liveAlertsButton);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //liveAlertsButton = findViewById(R.id.liveAlertsButton);
         connectDeviceButton = findViewById(R.id.connectDeviceButton);
 
-        /*motionSensorButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToMotionSensorDataActivity();
-            }
-        });*/
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference usersRef = database.getReference("users");
 
-        logoutButton.setOnClickListener(view -> new LogoutConfirmationDialogFragment().show(getSupportFragmentManager(), "LogoutConfirmationDialogFragment"));
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String uid = user.getUid();
+            DatabaseReference homesRef = usersRef.child(uid).child("homes");
 
-       /* usSensorButton.setOnClickListener(new View.OnClickListener() {
+            homesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<String> homeNamesList = new ArrayList<>();
+                    ArrayList<String> homeIdsList = new ArrayList<>();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        String homeName = snapshot.getValue(String.class);
+                        String homeId = snapshot.getKey();
+                        homeNamesList.add(homeName);
+                        homeIdsList.add(homeId);
+                    }
+                    Spinner spinner = findViewById(R.id.spinner);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, R.layout.spinner_item, homeNamesList);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(adapter);
+
+                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            String selectedHomeId = homeIdsList.get(position);
+                            fetchDevicesForHome(selectedHomeId);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+        }
+
+        devicesRecyclerView = findViewById(R.id.devicesRecyclerView);
+        devicesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+        adapter = new DevicesAdapter(this, new ArrayList<>(), new DevicesAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                goToUSSensorDataActivity();
+            public void onItemClick(int position) {
+                String deviceName = adapter.getDeviceNameAtPosition(position);
+                goToLiveAlertsActivity();
             }
         });
 
-        camFootageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToCameraFootageActivity();
-            }
-        });*/
 
-        addHomeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToAddHomeActivity();
-            }
-        });
+        devicesRecyclerView.setAdapter(adapter);
 
-        liveAlertsButton.setOnClickListener(new View.OnClickListener() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId);
+
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null) {
+                        String userFirstName = user.getFirstName();
+                        String userLastName = user.getLastName();
+                        String userEmail = user.getEmail();
+
+                        View headerView = navigationView.getHeaderView(0);
+                        userNameTextView = headerView.findViewById(R.id.navHeaderUserName);
+                        userEmailTextView = headerView.findViewById(R.id.navHeaderUserEmail);
+
+                        userNameTextView.setText(userFirstName + " " + userLastName);
+                        userEmailTextView.setText(userEmail);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.w("MainActivity", "loadUser:onCancelled", databaseError.toException());
+                }
+            });
+        }
+
+        /*liveAlertsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToLiveAlertsActivity();
             }
-        });
+        });*/
 
         connectDeviceButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,20 +174,69 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
 
-    private void goToMotionSensorDataActivity() {
-        Intent intent = new Intent(getApplicationContext(), MotionSensorDataActivity.class);
-        startActivity(intent);
+        return super.onOptionsItemSelected(item);
     }
 
-    private void goToUSSensorDataActivity() {
-        Intent intent = new Intent(getApplicationContext(), USSensorDataActivity.class);
-        startActivity(intent);
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        if (drawerToggle != null) {
+            drawerToggle.syncState();
+        }
     }
 
-    private void goToCameraFootageActivity() {
-        Intent intent = new Intent(getApplicationContext(), CameraFootageActivity.class);
-        startActivity(intent);
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (drawerToggle != null) {
+            drawerToggle.onConfigurationChanged(newConfig);
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.homeSettings) {
+
+        } else if (id == R.id.addHome) {
+            goToAddHomeActivity();
+        } else if (id == R.id.profileInformation) {
+
+        } else if (id == R.id.settings) {
+
+        } else if (id == R.id.logout) {
+            new LogoutConfirmationDialogFragment().show(getSupportFragmentManager(), "LogoutConfirmationDialogFragment");
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    private void fetchDevicesForHome(String homeId) {
+        DatabaseReference devicesRef = FirebaseDatabase.getInstance().getReference("homes").child(homeId).child("devices");
+        devicesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> deviceNamesList = new ArrayList<>();
+                for (DataSnapshot deviceSnapshot : dataSnapshot.getChildren()) {
+                    String deviceName = deviceSnapshot.getValue(String.class);
+                    deviceNamesList.add(deviceName);
+                }
+                adapter.updateDevicesList(deviceNamesList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("MainActivity", "loadDevices:onCancelled", databaseError.toException());
+            }
+        });
     }
 
     private void goToLiveAlertsActivity() {
@@ -110,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 }
 
 

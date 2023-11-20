@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DoorWatch Prototype</string>
+    <string name="open">Open Navigation Drawer</string>
+    <string name="close">Close Navigation Drawer</string>
     <string name="date">Date</string>
     <string name="time">Heure</string>
     <string name="cam_footage">Images de la Caméra</string>

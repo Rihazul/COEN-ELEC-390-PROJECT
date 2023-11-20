@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">DoorWatch Prototype</string>
+    <string name="open">Open Navigation Drawer</string>
+    <string name="close">Close Navigation Drawer</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="cam_footage">Camera Footage</string>
@@ -65,4 +67,6 @@
     <string name="an_account_with_this_email_already_exists">An account with this email already exists!</string>
     <string name="connect_your_device_by_entering_the_code_found_on_the_back_of_the_camera">Connect your device by entering the code found on the back of the camera</string>
     <string name="enter_device_code">Enter Device Code</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
 </resources>
