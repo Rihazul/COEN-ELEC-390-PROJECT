@@ -42,7 +42,6 @@
         android:layout_height="55dp"
         android:layout_marginTop="100dp"
         android:background="@drawable/edittext_background"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@-_"
         android:hint="@string/enter_home_name"
         android:inputType="text"
         android:paddingStart="12dp"

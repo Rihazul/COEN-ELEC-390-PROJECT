@@ -19,6 +19,24 @@
         <item name="colorAccent">@color/deep_navy_blue</item>
     </style>
 
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="buttonGradientStartColor">@color/light_blue</item>
+        <item name="buttonGradientEndColor">@color/dark_blue</item>
+        <item name="buttonBorderColor">@color/dark_blue</item>
+    </style>
+
+    <style name="RoundedFloatingButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="cornerRadius">256dp</item>
+        <item name="elevation">16dp</item>
+        <item name="android:background">@drawable/rounded_button</item>
+    </style>
+
     <attr name="buttonGradientStartColor" format="color" />
     <attr name="buttonGradientEndColor" format="color" />
     <attr name="buttonBorderColor" format="color" />

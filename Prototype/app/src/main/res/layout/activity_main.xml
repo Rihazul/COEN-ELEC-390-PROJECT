@@ -1,112 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
     tools:context=".MainActivity">
 
-    <!--<androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/motionSensorButton"
-        android:layout_width="325dp"
-        android:layout_height="55dp"
-        android:background="@drawable/button_gradient"
-        android:backgroundTint="@null"
-        android:text="@string/motion_sensor"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_gradient"
+        tools:context=".MainActivity">
 
-    <!--<androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/usSensorButton"
-        android:layout_width="325dp"
-        android:layout_height="55dp"
-        android:background="@drawable/button_gradient"
-        android:backgroundTint="@null"
-        android:text="@string/ultrasonic_sensor_data"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoutButton"
-        app:layout_constraintVertical_bias="0.117" />-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/teal_700"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/logoutButton"
-        android:layout_width="325dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="64dp"
-        android:background="@drawable/button_gradient"
-        android:backgroundTint="@null"
-        android:text="@string/logout"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.104" />
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/addHomeButton"
-        android:layout_width="325dp"
-        android:layout_height="55dp"
-        android:background="@drawable/button_gradient"
-        android:backgroundTint="@null"
-        android:text="@string/add_home"
-        android:textColor="@color/white"
-        android:layout_marginTop="64dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoutButton"
-        app:layout_constraintVertical_bias="0.0" />
 
-    <!--<androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/camFootageButton"
-        android:layout_width="325dp"
-        android:layout_height="55dp"
-        android:background="@drawable/button_gradient"
-        android:backgroundTint="@null"
-        android:text="@string/cam_footage"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addHomeButton"
-        app:layout_constraintVertical_bias="0.15" />-->
+        </androidx.appcompat.widget.Toolbar>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/liveAlertsButton"
-        android:layout_width="325dp"
-        android:layout_height="55dp"
-        android:background="@drawable/button_gradient"
-        android:backgroundTint="@null"
-        android:text="@string/live_alerts"
-        android:textColor="@color/white"
-        android:layout_marginTop="64dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addHomeButton"
-        app:layout_constraintVertical_bias="0.0" />
+        <!--<androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/liveAlertsButton"
+            android:layout_width="325dp"
+            android:layout_height="55dp"
+            android:background="@drawable/button_gradient"
+            android:backgroundTint="@null"
+            android:text="@string/live_alerts"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.237" />-->
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/connectDeviceButton"
-        android:layout_width="325dp"
-        android:layout_height="55dp"
-        android:background="@drawable/button_gradient"
-        android:backgroundTint="@null"
-        android:text="@string/connect_device"
-        android:textColor="@color/white"
-        android:layout_marginTop="64dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/liveAlertsButton"
-        app:layout_constraintVertical_bias="0.0" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/devicesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="577dp"
+            android:layout_marginTop="4dp"
+            android:clipToPadding="false"
+            android:padding="4dp"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintVertical_bias="0.094" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/connectDeviceButton"
+            android:layout_width="325dp"
+            android:layout_height="55dp"
+            android:text="@string/connect_device"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/teal_700"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.91"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/devicesRecyclerView"
+            app:layout_constraintVertical_bias="0.407"
+            app:srcCompat="@android:drawable/ic_input_add"
+            app:tint="@color/white" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:headerLayout="@layout/navigation_header"
+        app:menu="@menu/main_menu"
+        tools:ignore="MissingConstraints"
+        android:id="@+id/nav_view"
+        android:layout_gravity="start"/>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
