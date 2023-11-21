@@ -14,9 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Prototype"
         tools:targetApi="31">
-        <activity
-            android:name=".Navigation_drawer"
-            android:exported="false" />
+
         <activity
             android:name=".StartActivity"
             android:exported="true">
@@ -26,6 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ForgetPassword" />
+        <activity android:name=".Navigation_drawer" />
         <activity android:name=".CameraFootageActivity" />
         <activity android:name=".CameraFootageDetailsActivity" />
         <activity android:name=".ConnectDeviceActivity" />
