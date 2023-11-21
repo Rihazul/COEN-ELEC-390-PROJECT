@@ -35,15 +35,8 @@
         <activity android:name=".ConnectDeviceActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation"/>
-        <activity android:name=".MainActivity" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".ForgetPassword" />
         <activity android:name=".Navigation_drawer" />
-        <activity android:name=".CameraFootageActivity" />
-        <activity android:name=".CameraFootageDetailsActivity" />
-        <activity android:name=".ConnectDeviceActivity" />
         <activity android:name=".MainActivity"
             android:theme="@style/AppTheme"/>
         <activity android:name=".SignUpActivity" />
