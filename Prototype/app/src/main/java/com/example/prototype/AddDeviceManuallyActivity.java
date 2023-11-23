@@ -60,7 +60,7 @@ public class AddDeviceManuallyActivity extends AppCompatActivity {
     }
 
     private void goToConnectDeviceActivity(String homeId, String deviceId) {
-        Intent intent = new Intent(getApplicationContext(), SelectHomeActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ConnectDeviceActivity.class);
         intent.putExtra("homeId", homeId);
         intent.putExtra("deviceId", deviceId);
         startActivity(intent);
