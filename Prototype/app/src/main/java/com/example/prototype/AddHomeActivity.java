@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -131,7 +130,7 @@ public class AddHomeActivity extends AppCompatActivity {
     }
 
     private void goToConnectDeviceActivity() {
-        Intent intent = new Intent(getApplicationContext(), ConnectDeviceActivity.class);
+        Intent intent = new Intent(getApplicationContext(), AddDeviceIdActivity.class);
         startActivity(intent);
     }
     private void goToMainActivity() {

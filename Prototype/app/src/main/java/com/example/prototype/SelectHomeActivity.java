@@ -3,12 +3,8 @@ package com.example.prototype;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -76,7 +72,7 @@ public class SelectHomeActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToConnectDeviceActivity(homeId);
+                goToAddDeviceIdActivity(homeId);
             }
         });
 
@@ -111,8 +107,8 @@ public class SelectHomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void goToConnectDeviceActivity(String homeId) {
-        Intent intent = new Intent(getApplicationContext(), ConnectDeviceActivity.class);
+    private void goToAddDeviceIdActivity(String homeId) {
+        Intent intent = new Intent(getApplicationContext(), AddDeviceIdActivity.class);
         intent.putExtra("homeId", homeId);
         startActivity(intent);
     }

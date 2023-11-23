@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView userEmailTextView;
     private RecyclerView devicesRecyclerView;
     private DevicesAdapter adapter;
-    private Button cameraButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         navigationView = findViewById(R.id.nav_view);
-        cameraButton = findViewById(R.id.cameraButton);
         navigationView.setNavigationItemSelectedListener(this);
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -168,16 +166,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         connectDeviceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToConnectDeviceActivity(homeId[0]);
-            }
-        });
-
-        cameraButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivity(intent);
+                goToSelectHomeActivity(homeId[0]);
             }
         });
     }
@@ -221,6 +210,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.logout) {
             new LogoutConfirmationDialogFragment().show(getSupportFragmentManager(), "LogoutConfirmationDialogFragment");
+        } else if (id == R.id.scanFace) {
+            Intent intent = new Intent();
+            intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivity(intent);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -252,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
-    private void goToConnectDeviceActivity(String homeId) {
+    private void goToSelectHomeActivity(String homeId) {
         Intent intent = new Intent(getApplicationContext(), SelectHomeActivity.class);
         intent.putExtra("homeId", homeId);
         startActivity(intent);

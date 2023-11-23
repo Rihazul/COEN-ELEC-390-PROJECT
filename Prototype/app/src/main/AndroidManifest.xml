@@ -32,7 +32,7 @@
 
         <activity android:name=".CameraFootageActivity"/>
         <activity android:name=".CameraFootageDetailsActivity"/>
-        <activity android:name=".ConnectDeviceActivity"
+        <activity android:name=".AddDeviceIdActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation"/>
         <activity android:name=".ForgetPassword" />
@@ -47,6 +47,8 @@
         <activity android:name=".LiveAlertsDetailsActivity" />
         <activity android:name=".AddHomeActivity" />
         <activity android:name=".SelectHomeActivity" />
+        <activity android:name=".AddDeviceManuallyActivity" />
+        <activity android:name=".ConnectDeviceActivity" />
 
     </application>
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".ConnectDeviceActivity">
+    tools:context=".AddDeviceIdActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -49,34 +49,35 @@
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
         app:layout_constraintVertical_bias="0.086" />
 
-    <EditText
-        android:id="@+id/deviceCodeInput"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/manualDeviceIdButton"
         android:layout_width="325dp"
         android:layout_height="55dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edittext_background"
-        android:hint="@string/enter_device_code"
-        android:inputType="text"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        app:errorTextColor="@color/error_color"
+        android:background="@drawable/button_gradient"
+        android:backgroundTint="@null"
+        android:layout_marginTop="32dp"
+        android:text="@string/enter_device_id_manually"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/connectDeviceInstruction"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonScan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scan QR Code"
+        android:layout_width="325dp"
+        android:layout_height="55dp"
+        android:backgroundTint="@null"
+        android:background="@drawable/button_gradient"
+        android:layout_marginTop="32dp"
+        android:text="@string/scan_qr_code"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deviceCodeInput"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintTop_toBottomOf="@+id/manualDeviceIdButton"
+        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
         android:layout_width="325dp"
@@ -97,16 +98,6 @@
             android:background="@drawable/button_gradient"
             android:backgroundTint="@null"
             android:text="@string/cancel"
-            android:textColor="@color/white" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/nextButton"
-            android:layout_width="154.5dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/button_gradient"
-            android:backgroundTint="@null"
-            android:text="@string/next"
             android:textColor="@color/white" />
     </LinearLayout>
 

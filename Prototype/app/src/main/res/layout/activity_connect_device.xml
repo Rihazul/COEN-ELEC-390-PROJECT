@@ -38,27 +38,30 @@
 
     <TextView
         android:id="@+id/connectDeviceInstruction"
-        android:layout_width="wrap_content"
+        android:layout_width="325dp"
         android:layout_height="wrap_content"
-        android:text="@string/select_where_you_want_to_add_the_device"
+        android:text="@string/enter_device_name"
         android:textColor="@color/deep_navy_blue"
         android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
-        app:layout_constraintVertical_bias="0.03" />
+        app:layout_constraintVertical_bias="0.086" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="354dp"
-        android:padding="8dp"
+    <EditText
+        android:id="@+id/deviceNameInput"
+        android:layout_width="325dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_background"
+        android:hint="@string/device_name"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:errorTextColor="@color/error_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/connectDeviceInstruction"
         app:layout_constraintVertical_bias="0.0" />
@@ -71,7 +74,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/deviceNameInput"
         app:layout_constraintVertical_bias="0.632">
 
         <androidx.appcompat.widget.AppCompatButton
@@ -85,13 +88,13 @@
             android:textColor="@color/white" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/nextButton"
+            android:id="@+id/connectDeviceButton"
             android:layout_width="154.5dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
             android:background="@drawable/button_gradient"
             android:backgroundTint="@null"
-            android:text="@string/next"
+            android:text="@string/connect_device"
             android:textColor="@color/white" />
     </LinearLayout>
 
