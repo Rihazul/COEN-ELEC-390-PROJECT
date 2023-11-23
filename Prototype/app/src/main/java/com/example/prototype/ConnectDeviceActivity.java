@@ -23,17 +23,19 @@ public class ConnectDeviceActivity extends AppCompatActivity {
 
     private ImageButton backButton;
     private EditText deviceCodeInput;
-    private Button connectDeviceButton;
+    private Button nextButton;
+    private Button cancelButton;
     private Button buttonScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connect_device);
+        setContentView(R.layout.activity_connect_device_device_id);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         deviceCodeInput = findViewById(R.id.deviceCodeInput);
-        connectDeviceButton = findViewById(R.id.connectDeviceButton);
+        nextButton = findViewById(R.id.nextButton);
+        cancelButton = findViewById(R.id.cancelButton);
         backButton = findViewById(R.id.backButton);
         buttonScan = findViewById(R.id.buttonScan);
         buttonScan.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +49,7 @@ public class ConnectDeviceActivity extends AppCompatActivity {
         });
 
 
-        connectDeviceButton.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -60,6 +62,14 @@ public class ConnectDeviceActivity extends AppCompatActivity {
                 }
             }
         });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToMainActivity();
+            }
+        });
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +98,11 @@ public class ConnectDeviceActivity extends AppCompatActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private void goToMainActivity() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
     }
 
 }

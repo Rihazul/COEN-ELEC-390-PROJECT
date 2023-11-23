@@ -3,6 +3,7 @@ package com.example.prototype;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,11 +47,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView userEmailTextView;
     private RecyclerView devicesRecyclerView;
     private DevicesAdapter adapter;
+    private Button cameraButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final String[] homeId = {""};
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         navigationView = findViewById(R.id.nav_view);
+        cameraButton = findViewById(R.id.cameraButton);
         navigationView.setNavigationItemSelectedListener(this);
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -100,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             String selectedHomeId = homeIdsList.get(position);
+                            homeId[0] = selectedHomeId;
                             fetchDevicesForHome(selectedHomeId);
                         }
 
@@ -159,17 +165,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
         }
 
-        /*liveAlertsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToLiveAlertsActivity();
-            }
-        });*/
-
         connectDeviceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToConnectDeviceActivity();
+                goToConnectDeviceActivity(homeId[0]);
+            }
+        });
+
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivity(intent);
             }
         });
     }
@@ -244,8 +252,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
-    private void goToConnectDeviceActivity() {
-        Intent intent = new Intent(getApplicationContext(), ConnectDeviceActivity.class);
+    private void goToConnectDeviceActivity(String homeId) {
+        Intent intent = new Intent(getApplicationContext(), SelectHomeActivity.class);
+        intent.putExtra("homeId", homeId);
         startActivity(intent);
     }
 
