@@ -45,7 +45,6 @@ public class Face_Scan extends AppCompatActivity {
 
         imageView = findViewById(R.id.image_display);
         captureButton = findViewById(R.id.scan_pic);
-        uploadButton = findViewById(R.id.upload_picture);
 
        captureButton.setOnClickListener(new View.OnClickListener() {
            @Override
