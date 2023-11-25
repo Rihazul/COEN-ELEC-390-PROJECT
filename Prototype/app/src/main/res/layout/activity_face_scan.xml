@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_gradient"
+    tools:context=".Face_Scan">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0.5in"
+        android:layout_gravity="center"
+        android:textColor="@color/deep_navy_blue"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="Upload picture for face recognition !"
+        android:layout_marginBottom="0.5in"
+        />
+
+    <ImageView
+        android:id="@+id/image_display"
+        android:layout_gravity="center"
+        android:layout_width="198dp"
+        android:layout_height="170dp">
+    </ImageView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/scan_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_marginTop="80dp"
+        android:layout_gravity="center"
+        android:background="@drawable/button_gradient"
+        android:text=" Take a picture and upload "
+        android:drawableLeft="@drawable/baseline_linked_camera_24"
+        android:textColor="@color/white"/>
+
+
+
+
+</LinearLayout>

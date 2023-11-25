@@ -49,7 +49,9 @@ public class AddDeviceIdActivity extends AppCompatActivity {
             public void onClick(View v) {
                 IntentIntegrator integrator = new IntentIntegrator(AddDeviceIdActivity.this);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+                //integrator.setCaptureActivity(CaptureQRcodePortrait.class);
                 integrator.setPrompt("Scan a QR code");
+                integrator.setOrientationLocked(false);
                 integrator.initiateScan();
             }
         });

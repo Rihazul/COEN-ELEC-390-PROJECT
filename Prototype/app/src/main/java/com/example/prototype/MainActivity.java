@@ -211,9 +211,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.logout) {
             new LogoutConfirmationDialogFragment().show(getSupportFragmentManager(), "LogoutConfirmationDialogFragment");
         } else if (id == R.id.scanFace) {
-            Intent intent = new Intent();
-            intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivity(intent);
+            goToFaceScan();
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -257,6 +255,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
         finish();
     }
+
+    private void goToFaceScan()
+    {
+        Intent intent = new Intent(getApplicationContext(), Face_Scan.class);
+        intent.putExtra("CAMERA DIRECTION", "Face Scan");
+        startActivity(intent);
+        finish();
+    }
+
 
 }
 
