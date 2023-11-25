@@ -8,9 +8,11 @@
             <group android:checkableBehavior="single">
                 <item android:id="@+id/homeSettings"
                     android:title="@string/manage_homes"
+                    android:icon="@drawable/baseline_home_24"
                     />
                 <item android:id="@+id/addHome"
                     android:title="@string/add_home"
+                    android:icon="@drawable/baseline_add_home_24"
                     />
             </group>
         </menu>
@@ -23,9 +25,11 @@
                     />
                 <item android:id="@+id/settings"
                     android:title="@string/settings"
+                    android:icon="@drawable/baseline_settings_24"
                     />
                 <item android:id="@+id/logout"
                     android:title="@string/logout"
+                    android:icon="@drawable/baseline_logout_24"
                     />
             </group>
         </menu>
