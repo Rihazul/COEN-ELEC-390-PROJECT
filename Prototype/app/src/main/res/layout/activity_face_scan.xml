@@ -17,15 +17,15 @@
         android:textColor="@color/deep_navy_blue"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:text="Upload picture for face recognition !"
+        android:text="@string/upload_picture_for_face_recognition"
         android:layout_marginBottom="0.5in"
         />
 
     <ImageView
         android:id="@+id/image_display"
         android:layout_gravity="center"
-        android:layout_width="198dp"
-        android:layout_height="170dp">
+        android:layout_width="200dp"
+        android:layout_height="210dp">
     </ImageView>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -35,11 +35,9 @@
         android:layout_marginTop="80dp"
         android:layout_gravity="center"
         android:background="@drawable/button_gradient"
-        android:text=" Take a picture and upload "
+        android:text="@string/take_a_picture_and_upload"
         android:drawableLeft="@drawable/baseline_linked_camera_24"
         android:textColor="@color/white"/>
-
-
 
 
 </LinearLayout>

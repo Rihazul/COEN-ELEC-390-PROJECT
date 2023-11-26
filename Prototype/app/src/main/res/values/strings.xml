@@ -83,4 +83,11 @@
     <string name="profile">Profile</string>
     <string name="manage_homes">Manage Homes</string>
     <string name="home_management">Home Management</string>
+    <string name="upload_picture_for_face_recognition">Upload picture for face recognition !</string>
+    <string name="take_a_picture_and_upload"> Take a picture and upload    </string>
+    <string name="forget_password">Forgot Password</string>
+    <string name="reset_with_email">"Please provide your email to reset your password "</string>
+    <string name="email"> Email</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="back"> Back </string>
 </resources>

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -36,7 +37,7 @@ public class Face_Scan extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private ImageView imageView;
     private Button captureButton;
-    private Button uploadButton;
+    private Button Back;
     private Uri imageUri;
 
     @Override
@@ -49,6 +50,7 @@ public class Face_Scan extends AppCompatActivity {
 
         imageView = findViewById(R.id.image_display);
         captureButton = findViewById(R.id.scan_pic);
+
 
        captureButton.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -74,9 +76,12 @@ public class Face_Scan extends AppCompatActivity {
 
     private void onCaptureResult(Intent data)
     {
+        int targetHeight =imageView.getHeight();
+        int targetWidth = imageView.getWidth();
         Bitmap thumbnail =(Bitmap) data.getExtras().get("data");
+        thumbnail=resizeBitmap(thumbnail,targetWidth,targetHeight);
         ByteArrayOutputStream bytes= new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG,90,bytes);
+        thumbnail.compress(Bitmap.CompressFormat.JPEG,70,bytes);
         byte bb[] = bytes.toByteArray();
         String file = Base64.encodeToString(bb, Base64.DEFAULT);
         imageView.setImageBitmap(thumbnail);
@@ -86,7 +91,9 @@ public class Face_Scan extends AppCompatActivity {
 
     private void uploadToFirebase(byte[] bb) {
 
-        StorageReference sr = myStorage.child("myimages/a.jpg");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        String key = databaseReference.child("images").push().getKey();
+        StorageReference sr = myStorage.child("images").child(key+"_image"+".jpg");
         sr.putBytes(bb).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -101,5 +108,17 @@ public class Face_Scan extends AppCompatActivity {
         });
     }
 
+    private Bitmap resizeBitmap(Bitmap originalBitmap, int targetWidth, int targetHeight) {
+        // Calculate the scale factor
+        float scaleWidth = ((float) targetWidth) / originalBitmap.getWidth();
+        float scaleHeight = ((float) targetHeight) / originalBitmap.getHeight();
+
+        // Create a matrix for the manipulation
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // Resize the bitmap
+        return Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
+    }
 
 }
