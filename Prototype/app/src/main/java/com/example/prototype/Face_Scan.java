@@ -21,6 +21,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -31,6 +33,7 @@ public class Face_Scan extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private StorageReference myStorage;
+    private DatabaseReference mDatabase;
     private ImageView imageView;
     private Button captureButton;
     private Button uploadButton;
@@ -42,6 +45,7 @@ public class Face_Scan extends AppCompatActivity {
         setContentView(R.layout.activity_face_scan);
 
         myStorage = FirebaseStorage.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("captured_image");
 
         imageView = findViewById(R.id.image_display);
         captureButton = findViewById(R.id.scan_pic);
@@ -51,7 +55,7 @@ public class Face_Scan extends AppCompatActivity {
            public void onClick(View v) {
 
                Intent intent= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-               startActivityForResult(intent,101);
+               startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
            }
        });
 
@@ -61,12 +65,9 @@ public class Face_Scan extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode== Activity.RESULT_OK)
+        if(requestCode==REQUEST_IMAGE_CAPTURE && resultCode== RESULT_OK)
         {
-            if (requestCode == 101)
-            {
                 onCaptureResult(data);
-            }
         }
 
     }
