@@ -215,13 +215,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.addHome) {
             goToAddHomeActivity();
         } else if (id == R.id.profileInformation) {
-
+            openProfileActivity();
         } else if (id == R.id.settings) {
 
         } else if (id == R.id.logout) {
             new LogoutConfirmationDialogFragment().show(getSupportFragmentManager(), "LogoutConfirmationDialogFragment");
-        } else if (id == R.id.profileInformation) {
-            openProfileActivity();
         }
 
 
