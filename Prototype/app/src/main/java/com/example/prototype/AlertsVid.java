@@ -1,4 +1,12 @@
-public class MyActivity extends Activity {
+package com.example.prototype;
+
+import android.app.Activity;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+public class AlertsVid extends Activity {
 
     // ... Your existing code ...
 

@@ -1,9 +1,11 @@
+package com.example.prototype;
+
 import android.app.Activity;
 import android.telephony.SmsManager;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MyActivity extends Activity {
+public class SMS extends Activity {
 
     // Replace with the recipient's phone number
     private static final String phoneNumber = "1234567890";
