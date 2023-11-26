@@ -57,6 +57,9 @@ public class LiveAlertsListActivity extends AppCompatActivity {
         DatabaseReference motionSensorRef = FirebaseDatabase.getInstance().getReference("sensors/motionSensor");
         DatabaseReference usSensorRef = FirebaseDatabase.getInstance().getReference("sensors/usSensor");
 
+        List<LiveAlert> liveAlerts = new ArrayList<>();
+        CameraFootage[] previousCameraFootage = {null};
+
         videosRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -65,8 +68,18 @@ public class LiveAlertsListActivity extends AppCompatActivity {
                 for (DataSnapshot videoSnapshot : dataSnapshot.getChildren()) {
                     CameraFootage cameraFootage = videoSnapshot.getValue(CameraFootage.class);
                     if (cameraFootage != null) {
+                        if (previousCameraFootage[0] != null && !cameraFootage.equals(previousCameraFootage[0])) {
+                            // Trigger notification when criteria met (value changed)
+                            NotificationHandler.sendNotification(
+                                    LiveAlertsListActivity.this,
+                                    "CameraFootage Changed",
+                                    "Camera footage has changed!");
+                        }
+                        previousCameraFootage[0] = cameraFootage; // Update array value
+
                         LiveAlert liveAlert = new LiveAlert();
                         liveAlert.setVideo(cameraFootage);
+
 
                         motionSensorRef.orderByChild("date").equalTo(cameraFootage.getDate())
                                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -76,6 +89,15 @@ public class LiveAlertsListActivity extends AppCompatActivity {
                                             Sensor motionSensor = snap.getValue(Sensor.class);
                                             if (motionSensor != null && motionSensor.getTime().equals(cameraFootage.getTime())) {
                                                 liveAlert.setMotionSensor(motionSensor);
+
+
+                                                if (!cameraFootage.equals(previousCameraFootage[0])) {
+
+                                                    NotificationHandler.sendNotification(
+                                                            LiveAlertsListActivity.this,
+                                                            "Video Footage Changed",
+                                                            "Video footage has been updated!");
+                                                }
                                             }
                                         }
                                     }
@@ -86,23 +108,6 @@ public class LiveAlertsListActivity extends AppCompatActivity {
                                     }
                                 });
 
-                        usSensorRef.orderByChild("date").equalTo(cameraFootage.getDate())
-                                .addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot usSnapshot) {
-                                        for (DataSnapshot snap : usSnapshot.getChildren()) {
-                                            Sensor usSensor = snap.getValue(Sensor.class);
-                                            if (usSensor != null && usSensor.getTime().equals(cameraFootage.getTime())) {
-                                                liveAlert.setUsSensor(usSensor);
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                        Log.e(TAG, "Error fetching US sensor data", error.toException());
-                                    }
-                                });
 
                         liveAlerts.add(liveAlert);
                     }
@@ -117,6 +122,7 @@ public class LiveAlertsListActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void setupRecyclerView(List<LiveAlert> liveAlerts) {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);

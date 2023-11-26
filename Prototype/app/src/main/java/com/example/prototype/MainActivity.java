@@ -33,6 +33,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -213,7 +220,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.logout) {
             new LogoutConfirmationDialogFragment().show(getSupportFragmentManager(), "LogoutConfirmationDialogFragment");
+        } else if (id == R.id.profileInformation) {
+            openProfileActivity();
         }
+
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -249,6 +259,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
+
+
     private void goToAddHomeActivity() {
         Intent intent = new Intent(getApplicationContext(), AddHomeActivity.class);
         intent.putExtra("Source", "Main");
@@ -256,6 +268,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         finish();
     }
 
+    private void openProfileActivity() {
+        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+        startActivity(intent);
+    }
 }
 
 
