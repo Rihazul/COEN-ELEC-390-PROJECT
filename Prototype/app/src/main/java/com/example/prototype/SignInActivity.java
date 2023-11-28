@@ -48,6 +48,7 @@ public class SignInActivity extends AppCompatActivity {
         ProgressBar progressIndicator = findViewById(R.id.progress_sign_in);
 
         progressIndicator.setVisibility(View.GONE);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
