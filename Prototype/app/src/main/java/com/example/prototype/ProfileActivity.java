@@ -40,8 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
                         editFirstName.setText(user.getFirstName());
                         editLastName.setText(user.getLastName());
                         editEmail.setText(user.getEmail());
-                        // Note: You may not want to display the password in the UI
-                        // editPassword.setText(user.getPassword());
+                        editPassword.setText(user.getPassword());// Note: You may not want to display the password in the UI
                     }
                 }
 
