@@ -3,12 +3,14 @@ package com.example.prototype;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,6 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private TextInputLayout passwordInputLayout;
     private TextInputLayout confirmPasswordInputLayout;
+    private ProgressBar progressIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +59,13 @@ public class SignUpActivity extends AppCompatActivity {
         createAccountButton = findViewById(R.id.createAccountButton);
         rememberMeButton = findViewById(R.id.rememberMeButton);
         alreadyHaveAccountButton = findViewById(R.id.alreadyHaveAccountButton);
+        progressIndicator = findViewById(R.id.progress_sign_up);
 
+        progressIndicator.setVisibility(View.GONE);
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressIndicator.setVisibility(View.VISIBLE);
                 String firstName = firstNameInput.getText().toString();
                 String lastName = lastNameInput.getText().toString();
                 String email = emailInput.getText().toString();
@@ -68,11 +74,17 @@ public class SignUpActivity extends AppCompatActivity {
 
                 User user = new User(firstName, lastName, email, password);
 
-                if (validateInformation(user, confirmPassword)) {
-                    saveUserInDatabase(user);
-                } else {
-                    Toast.makeText(SignUpActivity.this, R.string.invalid_information, Toast.LENGTH_SHORT).show();
-                }
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (validateInformation(user, confirmPassword)) {
+                            saveUserInDatabase(user);
+                        } else {
+                            Toast.makeText(SignUpActivity.this, R.string.invalid_information, Toast.LENGTH_SHORT).show();
+                            progressIndicator.setVisibility(View.GONE);
+                        }
+                    }
+                },4000);
             }
         });
 

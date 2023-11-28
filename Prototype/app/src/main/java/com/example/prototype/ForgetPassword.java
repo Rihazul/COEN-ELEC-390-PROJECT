@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,6 +26,7 @@ public class ForgetPassword extends AppCompatActivity {
     private Button button_back;
     FirebaseAuth mAuth;
     private String Email;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,20 +36,30 @@ public class ForgetPassword extends AppCompatActivity {
         editText1=findViewById(R.id.reset_email);
         button_reset=findViewById(R.id.reset_password);
         button_back=findViewById(R.id.go_back);
+        progressBar = findViewById(R.id.progress_forget);
 
         mAuth=FirebaseAuth.getInstance();
 
+        progressBar.setVisibility(View.GONE);
         button_reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                  Email=editText1.getText().toString().trim();
-                if(!TextUtils.isEmpty(Email))
-                {
-                    ResetPassword();
-                }
-                else {
-                    editText1.setError("Email field can't be empty");
-                }
+
+                 new Handler().postDelayed(new Runnable() {
+                     @Override
+                     public void run() {
+                         if(!TextUtils.isEmpty(Email))
+                         {
+                             ResetPassword();
+                         }
+                         else {
+                             editText1.setError("Email field can't be empty");
+                             progressBar.setVisibility(View.GONE);
+                         }
+                     }
+                 },4000);
             }
         });
 

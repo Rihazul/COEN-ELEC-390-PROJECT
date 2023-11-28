@@ -30,6 +30,7 @@ public class SignInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private CheckBox rememberMeButton;
     private Button forgotPasswordButton;
+    private ProgressBar progressIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class SignInActivity extends AppCompatActivity {
         rememberMeButton = findViewById(R.id.rememberMeButton);
         forgotPasswordButton = findViewById(R.id.forgotPasswordButton);
         passwordInputLayout = findViewById(R.id.passwordInputLayout);
-        ProgressBar progressIndicator = findViewById(R.id.progress_sign_in);
+        progressIndicator = findViewById(R.id.progress_sign_in);
 
         progressIndicator.setVisibility(View.GONE);
 
