@@ -33,20 +33,6 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <!--<androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/liveAlertsButton"
-            android:layout_width="325dp"
-            android:layout_height="55dp"
-            android:background="@drawable/button_gradient"
-            android:backgroundTint="@null"
-            android:text="@string/live_alerts"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:layout_constraintVertical_bias="0.237" />-->
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/devicesRecyclerView"
             android:layout_width="match_parent"

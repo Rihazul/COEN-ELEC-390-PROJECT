@@ -9,42 +9,33 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.Objects;
 
-public class ConnectDeviceActivity extends AppCompatActivity {
+public class AddDeviceManuallyActivity extends AppCompatActivity {
 
-    private EditText deviceNameInput;
-    private Button connectDeviceButton;
+    private EditText deviceCodeInput;
+    private Button nextButton;
     private Button cancelButton;
     private ImageButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connect_device);
+        setContentView(R.layout.activity_connect_device_manual_device_id);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         String homeId = getIntent().getStringExtra("homeId");
-        String deviceId = getIntent().getStringExtra("deviceId");
 
-        deviceNameInput = findViewById(R.id.deviceNameInput);
-        connectDeviceButton = findViewById(R.id.connectDeviceButton);
+        deviceCodeInput = findViewById(R.id.deviceCodeInput);
+        nextButton = findViewById(R.id.nextButton);
         cancelButton = findViewById(R.id.cancelButton);
         backButton = findViewById(R.id.backButton);
 
-        connectDeviceButton.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String deviceName = deviceNameInput.getText().toString();
-
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                ref.child("homes").child(homeId).child("devices").child(deviceId).setValue(deviceName);
-                ref.child("devices").child(deviceId);
-
-                goToMainActivity();
+                String deviceId = deviceCodeInput.getText().toString();
+                goToConnectDeviceActivity(homeId, deviceId);
             }
         });
 
@@ -65,6 +56,13 @@ public class ConnectDeviceActivity extends AppCompatActivity {
 
     private void goToMainActivity() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void goToConnectDeviceActivity(String homeId, String deviceId) {
+        Intent intent = new Intent(getApplicationContext(), ConnectDeviceActivity.class);
+        intent.putExtra("homeId", homeId);
+        intent.putExtra("deviceId", deviceId);
         startActivity(intent);
     }
 }
