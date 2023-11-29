@@ -40,7 +40,7 @@
         android:id="@+id/connectDeviceInstruction"
         android:layout_width="325dp"
         android:layout_height="wrap_content"
-        android:text="@string/enter_device_name"
+        android:text="@string/enter_the_device_code"
         android:textColor="@color/deep_navy_blue"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,12 +50,12 @@
         app:layout_constraintVertical_bias="0.086" />
 
     <EditText
-        android:id="@+id/deviceNameInput"
+        android:id="@+id/deviceCodeInput"
         android:layout_width="325dp"
         android:layout_height="55dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edittext_background"
-        android:hint="@string/device_name"
+        android:hint="@string/enter_device_code"
         android:inputType="text"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
@@ -74,7 +74,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deviceNameInput"
+        app:layout_constraintTop_toBottomOf="@+id/deviceCodeInput"
         app:layout_constraintVertical_bias="0.632">
 
         <androidx.appcompat.widget.AppCompatButton
@@ -88,13 +88,13 @@
             android:textColor="@color/white" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/connectDeviceButton"
+            android:id="@+id/nextButton"
             android:layout_width="154.5dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
             android:background="@drawable/button_gradient"
             android:backgroundTint="@null"
-            android:text="@string/connect_device"
+            android:text="@string/next"
             android:textColor="@color/white" />
     </LinearLayout>
 

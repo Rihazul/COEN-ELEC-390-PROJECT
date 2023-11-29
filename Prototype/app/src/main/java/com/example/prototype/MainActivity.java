@@ -3,12 +3,15 @@ package com.example.prototype;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -46,11 +49,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView userEmailTextView;
     private RecyclerView devicesRecyclerView;
     private DevicesAdapter adapter;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final String[] homeId = {""};
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -58,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
+
+        progressBar = findViewById(R.id.progress_list);
+        progressBar.setVisibility(View.GONE);
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -100,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             String selectedHomeId = homeIdsList.get(position);
+                            homeId[0] = selectedHomeId;
                             fetchDevicesForHome(selectedHomeId);
                         }
 
@@ -122,7 +132,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onItemClick(int position) {
                 String deviceName = adapter.getDeviceNameAtPosition(position);
-                goToLiveAlertsActivity();
+
+                progressBar.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        goToLiveAlertsActivity();
+                    }
+                },3000);
+
             }
         });
 
@@ -159,17 +178,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
         }
 
-        /*liveAlertsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToLiveAlertsActivity();
-            }
-        });*/
-
         connectDeviceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToConnectDeviceActivity();
+                goToSelectHomeActivity(homeId[0]);
             }
         });
     }
@@ -213,6 +225,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.logout) {
             new LogoutConfirmationDialogFragment().show(getSupportFragmentManager(), "LogoutConfirmationDialogFragment");
+        } else if (id == R.id.scanFace) {
+            goToFaceScan();
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -244,8 +258,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
-    private void goToConnectDeviceActivity() {
-        Intent intent = new Intent(getApplicationContext(), ConnectDeviceActivity.class);
+    private void goToSelectHomeActivity(String homeId) {
+        Intent intent = new Intent(getApplicationContext(), SelectHomeActivity.class);
+        intent.putExtra("homeId", homeId);
         startActivity(intent);
     }
 
@@ -255,6 +270,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
         finish();
     }
+
+    private void goToFaceScan()
+    {
+        Intent intent = new Intent(getApplicationContext(), Face_Scan.class);
+        intent.putExtra("CAMERA DIRECTION", "Face Scan");
+        startActivity(intent);
+        finish();
+    }
+
 
 }
 

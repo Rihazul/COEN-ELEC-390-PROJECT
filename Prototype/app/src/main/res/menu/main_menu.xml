@@ -3,22 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-   <!-- <group android:checkableBehavior="single">
-        <item android:id="@+id/home"
-         android:title="Home"
-         />
-        <item android:id="@+id/contact"
-            android:title="Contact"
-            />
-        <item android:id="@+id/gallery"
-            android:title="Gallery"
-            />
-    </group>-->
-    <item android:title="Home Management">
+    <item android:title="@string/home_management">
         <menu>
             <group android:checkableBehavior="single">
                 <item android:id="@+id/homeSettings"
-                    android:title="Manage Homes"
+                    android:title="@string/manage_homes"
                     />
                 <item android:id="@+id/addHome"
                     android:title="@string/add_home"
@@ -26,21 +15,28 @@
             </group>
         </menu>
     </item>
-    <item android:title="Profile">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/scanFace"
+             android:title="@string/scan_your_face"
+        />
+    </group>
+    <item android:title="@string/profile">
         <menu>
             <group android:checkableBehavior="single">
-                <item android:title="Profile Information"
+                <item android:title="@string/profile_information"
                     android:id="@+id/profileInformation"
                     />
                 <item android:id="@+id/settings"
-                    android:title="Settings"
+                    android:title="@string/settings"
                     />
                 <item android:id="@+id/logout"
-                    android:title="Logout"
+                    android:title="@string/logout"
                     />
             </group>
         </menu>
     </item>
+
    <!-- <item android:title="Communication">
         <menu>
             <group android:checkableBehavior="single">
