@@ -3,6 +3,7 @@ package com.example.prototype;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final String[] homeId = {""};
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -107,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             String selectedHomeId = homeIdsList.get(position);
+                            homeId[0] = selectedHomeId;
                             fetchDevicesForHome(selectedHomeId);
                         }
 
@@ -166,17 +170,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
         }
 
-        /*liveAlertsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToLiveAlertsActivity();
-            }
-        });*/
-
         connectDeviceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToConnectDeviceActivity();
+                goToSelectHomeActivity(homeId[0]);
             }
         });
     }
@@ -217,9 +214,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.profileInformation) {
             openProfileActivity();
         } else if (id == R.id.settings) {
-
+            openSettingsActivity();
         } else if (id == R.id.logout) {
             new LogoutConfirmationDialogFragment().show(getSupportFragmentManager(), "LogoutConfirmationDialogFragment");
+        } else if (id == R.id.scanFace) {
+            goToFaceScan();
         }
 
 
@@ -252,8 +251,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
-    private void goToConnectDeviceActivity() {
-        Intent intent = new Intent(getApplicationContext(), ConnectDeviceActivity.class);
+    private void goToSelectHomeActivity(String homeId) {
+        Intent intent = new Intent(getApplicationContext(), SelectHomeActivity.class);
+        intent.putExtra("homeId", homeId);
         startActivity(intent);
     }
 
@@ -269,6 +269,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void openProfileActivity() {
         Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
         startActivity(intent);
+    }
+
+    private void openSettingsActivity() {
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    private void goToFaceScan()
+    {
+        Intent intent = new Intent(getApplicationContext(), Face_Scan.class);
+        intent.putExtra("CAMERA DIRECTION", "Face Scan");
+        startActivity(intent);
+        finish();
     }
 }
 
