@@ -3,6 +3,7 @@ package com.example.prototype;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView userEmailTextView;
     private RecyclerView devicesRecyclerView;
     private DevicesAdapter adapter;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
+
+        progressBar = findViewById(R.id.progress_list);
+        progressBar.setVisibility(View.GONE);
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -126,7 +132,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onItemClick(int position) {
                 String deviceName = adapter.getDeviceNameAtPosition(position);
-                goToLiveAlertsActivity();
+
+                progressBar.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        goToLiveAlertsActivity();
+                    }
+                },3000);
+
             }
         });
 
@@ -211,9 +226,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.logout) {
             new LogoutConfirmationDialogFragment().show(getSupportFragmentManager(), "LogoutConfirmationDialogFragment");
         } else if (id == R.id.scanFace) {
-            Intent intent = new Intent();
-            intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivity(intent);
+            goToFaceScan();
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -257,6 +270,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
         finish();
     }
+
+    private void goToFaceScan()
+    {
+        Intent intent = new Intent(getApplicationContext(), Face_Scan.class);
+        intent.putExtra("CAMERA DIRECTION", "Face Scan");
+        startActivity(intent);
+        finish();
+    }
+
 
 }
 

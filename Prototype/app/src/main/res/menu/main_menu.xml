@@ -17,6 +17,12 @@
             </group>
         </menu>
     </item>
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/scanFace"
+             android:title="@string/scan_your_face"
+        />
+    </group>
     <item android:title="@string/profile">
         <menu>
             <group android:checkableBehavior="single">
@@ -34,11 +40,7 @@
             </group>
         </menu>
     </item>
-     <group android:checkableBehavior="single">
-       <item android:id="@+id/scanFace"
-           android:title="@string/scan_your_face"
-           />
-   </group>
+
    <!-- <item android:title="Communication">
         <menu>
             <group android:checkableBehavior="single">
