@@ -46,7 +46,7 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Face_Scan" />
+        <activity android:name=".FaceScanActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".MotionSensorDataActivity" />

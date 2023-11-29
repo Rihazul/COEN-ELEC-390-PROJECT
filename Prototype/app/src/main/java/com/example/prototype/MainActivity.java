@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -314,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void goToFaceScan()
     {
-        Intent intent = new Intent(getApplicationContext(), Face_Scan.class);
+        Intent intent = new Intent(getApplicationContext(), FaceScanActivity.class);
         intent.putExtra("CAMERA DIRECTION", "Face Scan");
         startActivity(intent);
         finish();

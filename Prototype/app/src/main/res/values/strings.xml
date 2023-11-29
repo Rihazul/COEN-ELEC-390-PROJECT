@@ -90,4 +90,5 @@
     <string name="email"> Email</string>
     <string name="reset_password">Reset Password</string>
     <string name="back"> Back </string>
+    <string name="scan_face">Scan Face</string>
 </resources>
