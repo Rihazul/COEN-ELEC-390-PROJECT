@@ -57,6 +57,7 @@
         <activity android:name=".SelectHomeActivity" />
         <activity android:name=".AddDeviceManuallyActivity" />
         <activity android:name=".ConnectDeviceActivity" />
+        <activity android:name=".IntermediateConnectDeviceActivity" />
     </application>
 
 </manifest>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.progressindicator.CircularProgressIndicator;
@@ -18,10 +20,20 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
 public class SignInActivity extends AppCompatActivity {
+
+    interface FirstHomeCheckCallback {
+        void onCheckCompleted(boolean isFirstHome);
+    }
 
     private EditText emailInput;
     private EditText passwordInput;
@@ -31,6 +43,7 @@ public class SignInActivity extends AppCompatActivity {
     private CheckBox rememberMeButton;
     private Button forgotPasswordButton;
     private ProgressBar progressIndicator;
+    private boolean isFirstHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +80,7 @@ public class SignInActivity extends AppCompatActivity {
                             progressIndicator.setVisibility(View.GONE);
                         }
                     }
-                },4000);
+                },2000);
             }
         });
 
@@ -119,7 +132,16 @@ public class SignInActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         if(mAuth.getCurrentUser().isEmailVerified())
-                            {goToAddHomeActivity();}
+                            {
+                                determineIfFirstHome(isFirstHome -> {
+                                    this.isFirstHome = isFirstHome;
+                                    if (this.isFirstHome) {
+                                        goToAddHomeActivity();
+                                    } else {
+                                        goToMainActivity();
+                                    }
+                                });
+                            }
                         else {
                             Toast.makeText(SignInActivity.this, R.string.please_verify_your_email_address, Toast.LENGTH_LONG).show();
                         }
@@ -135,9 +157,29 @@ public class SignInActivity extends AppCompatActivity {
                 });
     }
 
+    private void determineIfFirstHome(SignInActivity.FirstHomeCheckCallback callback) {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = currentUser.getUid();
+        DatabaseReference userHomesRef = FirebaseDatabase.getInstance().getReference("users")
+                .child(uid).child("homes");
+
+        userHomesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean isFirstHome = !dataSnapshot.exists() || !dataSnapshot.hasChildren();
+                callback.onCheckCompleted(isFirstHome);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("AddHomeActivity", "checkIfFirstHome:onCancelled", databaseError.toException());
+            }
+        });
+    }
+
     private void goToAddHomeActivity() {
         Intent intent = new Intent(getApplicationContext(), AddHomeActivity.class);
-        intent.putExtra("Source", "Sign Up");
+        intent.putExtra("isFirstHome", "True");
         startActivity(intent);
         finish();
     }
@@ -146,5 +188,11 @@ public class SignInActivity extends AppCompatActivity {
         Intent intent= new Intent(getApplicationContext(),ForgetPassword.class);
         startActivity(intent);
         finish();
+    }
+
+    private void goToMainActivity() {
+        Intent intent= new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);
+        finish();;
     }
 }

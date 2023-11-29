@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background_gradient">
 
     <TextView
-        android:id="@+id/createHomeTitle"
+        android:id="@+id/connectDeviceTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_home"
+        android:text="@string/connect_device"
         android:textAlignment="center"
+        android:textColor="@color/deep_navy_blue"
         android:textSize="34sp"
         android:textStyle="bold"
-        android:textColor="@color/deep_navy_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -23,65 +22,49 @@
         app:layout_constraintVertical_bias="0.095" />
 
     <TextView
-        android:id="@+id/createFirstHomeTitle"
+        android:id="@+id/connectYourDevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_your_first_home"
+        android:text="Press next to continue"
         android:textColor="@color/deep_navy_blue"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createHomeTitle"
+        app:layout_constraintTop_toBottomOf="@+id/connectDeviceTitle"
         app:layout_constraintVertical_bias="0.05" />
-
-    <EditText
-        android:id="@+id/homeNameInput"
-        android:layout_width="325dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/edittext_background"
-        android:hint="@string/enter_home_name"
-        android:inputType="text"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        app:errorTextColor="@color/error_color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createHomeTitle"
-        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
         android:layout_width="325dp"
         android:layout_height="55dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeNameInput"
-        app:layout_constraintVertical_bias="0.815">
+        app:layout_constraintTop_toBottomOf="@+id/connectYourDevice"
+        app:layout_constraintVertical_bias="0.632">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/cancelButton"
+            android:id="@+id/notNowButton"
             android:layout_width="154.5dp"
             android:layout_height="match_parent"
             android:layout_marginRight="8dp"
             android:background="@drawable/button_border"
             android:textColor="@color/dark_blue"
             android:backgroundTint="@null"
-            android:text="@string/cancel" />
+            android:text="@string/not_now" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/addHomeButton"
+            android:id="@+id/nextButton"
             android:layout_width="154.5dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
             android:background="@drawable/button_gradient"
             android:backgroundTint="@null"
-            android:text="@string/add"
+            android:text="@string/next"
             android:textColor="@color/white" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

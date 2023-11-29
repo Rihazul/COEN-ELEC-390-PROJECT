@@ -306,7 +306,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void goToAddHomeActivity() {
         Intent intent = new Intent(getApplicationContext(), AddHomeActivity.class);
-        intent.putExtra("Source", "Main");
+        intent.putExtra("isFirstHome", "False");
         startActivity(intent);
         finish();
     }
