@@ -32,8 +32,11 @@ public class LiveAlertsAdapter extends RecyclerView.Adapter<LiveAlertsAdapter.Vi
     public void onBindViewHolder(@NonNull LiveAlertsAdapter.ViewHolder viewHolder, int position) {
         LiveAlert liveAlert = liveAlertList.get(position);
 
+        int count = position + 1;
+
         viewHolder.dateTextView.setText(liveAlert.getVideo().getDate());
         viewHolder.timeTextView.setText(liveAlert.getVideo().getTime());
+        viewHolder.counterTextView.setText(String.valueOf(count));
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,11 +62,13 @@ public class LiveAlertsAdapter extends RecyclerView.Adapter<LiveAlertsAdapter.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView dateTextView;
         public TextView timeTextView;
+        public TextView counterTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             dateTextView = itemView.findViewById(R.id.dateTextView);
             timeTextView = itemView.findViewById(R.id.timeTextView);
+            counterTextView = itemView.findViewById(R.id.counterTextView);
         }
     }
 }
