@@ -3,7 +3,6 @@ package com.example.prototype;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -14,11 +13,9 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,27 +26,37 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Objects;
 
-public class Face_Scan extends AppCompatActivity {
+public class FaceScanActivity extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private StorageReference myStorage;
     private DatabaseReference mDatabase;
     private ImageView imageView;
     private Button captureButton;
-    private Button Back;
+    private ImageButton backButton;
     private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_face_scan);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         myStorage = FirebaseStorage.getInstance().getReference();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("captured_image");
 
         imageView = findViewById(R.id.image_display);
         captureButton = findViewById(R.id.scan_pic);
+        backButton = findViewById(R.id.backButton);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToMainActivity();
+            }
+        });
 
 
        captureButton.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +67,6 @@ public class Face_Scan extends AppCompatActivity {
                startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
            }
        });
-
     }
 
     protected void onActivityResult(int requestCode,int resultCode,Intent data) {
@@ -97,13 +103,13 @@ public class Face_Scan extends AppCompatActivity {
         sr.putBytes(bb).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(Face_Scan.this,"Image Uploaded Successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FaceScanActivity.this,"Image Uploaded Successfully!", Toast.LENGTH_SHORT).show();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Face_Scan.this,"Upload Failed 👎", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FaceScanActivity.this,"Upload Failed 👎", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -121,4 +127,8 @@ public class Face_Scan extends AppCompatActivity {
         return Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
     }
 
+    private void goToMainActivity() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    }
 }

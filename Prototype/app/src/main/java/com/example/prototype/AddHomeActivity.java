@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,10 +26,6 @@ import java.util.Objects;
 
 public class AddHomeActivity extends AppCompatActivity {
 
-    interface FirstHomeCheckCallback {
-        void onCheckCompleted(boolean isFirstHome);
-    }
-
     private TextView firstHomeTitle;
     private EditText homeNameInput;
     private Button cancelButton;
@@ -41,32 +38,29 @@ public class AddHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_home);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+        String isFirstHomeString = getIntent().getStringExtra("isFirstHome");
+
         firstHomeTitle = findViewById(R.id.createFirstHomeTitle);
         homeNameInput = findViewById(R.id.homeNameInput);
         cancelButton = findViewById(R.id.cancelButton);
         addHomeButton = findViewById(R.id.addHomeButton);
 
-        determineIfFirstHome(isFirstHome -> {
-            this.isFirstHome = isFirstHome;
+        if (isFirstHomeString.equals("True")) {
+            isFirstHome = true;
+        } else {
+            isFirstHome = false;
+        }
 
-            String source = getIntent().getStringExtra("Source");
-            if (source.equals("Sign Up") && !this.isFirstHome) {
+        setupUIForFirstHome(isFirstHome);
+
+        addHomeButton.setOnClickListener(view -> {
+            String homeName = homeNameInput.getText().toString();
+            saveHome(homeName);
+            if (this.isFirstHome) {
+                goToSelectHomeActivity();
+            } else {
                 goToMainActivity();
             }
-
-            setupUIForFirstHome(this.isFirstHome);
-
-            addHomeButton.setOnClickListener(view -> {
-                String homeName = homeNameInput.getText().toString();
-                saveHome(homeName);
-                if (this.isFirstHome) {
-                    //TODO implement connect device activity
-                    //goToConnectDeviceActivity();
-                    goToMainActivity();
-                } else {
-                    goToMainActivity();
-                }
-            });
         });
 
         cancelButton.setOnClickListener(view -> {
@@ -75,30 +69,20 @@ public class AddHomeActivity extends AppCompatActivity {
         });
     }
 
-    private void determineIfFirstHome(FirstHomeCheckCallback callback) {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = currentUser.getUid();
-        DatabaseReference userHomesRef = FirebaseDatabase.getInstance().getReference("users")
-                .child(uid).child("homes");
-
-        userHomesRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean isFirstHome = !dataSnapshot.exists() || !dataSnapshot.hasChildren();
-                callback.onCheckCompleted(isFirstHome);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w("AddHomeActivity", "checkIfFirstHome:onCancelled", databaseError.toException());
-            }
-        });
-    }
-
     private void setupUIForFirstHome(boolean isFirstHome) {
         if (!isFirstHome) {
             cancelButton.setVisibility(View.VISIBLE);
             firstHomeTitle.setVisibility(View.GONE);
+        } else {
+            cancelButton.setVisibility(View.GONE);
+
+            int dpValue = 325;
+            float d = getResources().getDisplayMetrics().density;
+            int width = (int)(dpValue * d);
+
+            ViewGroup.LayoutParams params = addHomeButton.getLayoutParams();
+            params.width = width;
+            addHomeButton.setLayoutParams(params);
         }
     }
 
@@ -129,8 +113,8 @@ public class AddHomeActivity extends AppCompatActivity {
         }
     }
 
-    private void goToConnectDeviceActivity() {
-        Intent intent = new Intent(getApplicationContext(), AddDeviceIdActivity.class);
+    private void goToSelectHomeActivity() {
+        Intent intent = new Intent(getApplicationContext(), IntermediateConnectDeviceActivity.class);
         startActivity(intent);
     }
     private void goToMainActivity() {

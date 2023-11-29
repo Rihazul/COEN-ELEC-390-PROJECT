@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,6 +124,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
         }
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.w("FCM", "Fetching FCM registration token failed", task.getException());
+                        return;
+                    }
+
+                    // Get the FCM registration token
+                    String token = task.getResult();
+
+                    // Log or store the token as needed
+                    Log.d("FCM", "FCM Token: " + token);
+                    sendTokenToServer(token);
+                });
 
         devicesRecyclerView = findViewById(R.id.devicesRecyclerView);
         devicesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -253,6 +268,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+    private void sendTokenToServer(String token) {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
+
+        // Check if the UID is null (user not authenticated)
+        if (uid == null) {
+            Log.d("FCM", "User is not authenticated. Token not saved.");
+            return;
+        }
+
+        // Define the path to where you want to store the token in your database
+        String tokenPath = "users/" + uid + "/fcmToken";
+
+        // Set the token at the specified path
+        databaseRef.child(tokenPath).setValue(token)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("FCM", "Token saved successfully");
+                    // You can perform additional actions here if needed
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("FCM", "Failed to save token", e);
+                    // Handle the error
+                });
+    }
+
     private void goToLiveAlertsActivity() {
         Intent intent = new Intent(getApplicationContext(), LiveAlertsListActivity.class);
         startActivity(intent);
@@ -266,14 +306,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void goToAddHomeActivity() {
         Intent intent = new Intent(getApplicationContext(), AddHomeActivity.class);
-        intent.putExtra("Source", "Main");
+        intent.putExtra("isFirstHome", "False");
         startActivity(intent);
         finish();
     }
 
     private void goToFaceScan()
     {
-        Intent intent = new Intent(getApplicationContext(), Face_Scan.class);
+        Intent intent = new Intent(getApplicationContext(), FaceScanActivity.class);
         intent.putExtra("CAMERA DIRECTION", "Face Scan");
         startActivity(intent);
         finish();
