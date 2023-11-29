@@ -194,12 +194,16 @@
         android:id="@+id/progress_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         app:indicatorColor="#000000"
         app:indicatorSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rememberMeButton"
+        app:layout_constraintVertical_bias="0.107"
         app:trackThickness="4dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="163dp" />
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

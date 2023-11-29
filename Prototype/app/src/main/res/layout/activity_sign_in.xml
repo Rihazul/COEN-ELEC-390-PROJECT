@@ -1,3 +1,4 @@
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -135,9 +136,10 @@
         android:layout_marginTop="16dp"
         app:indicatorColor="#000000"
         app:indicatorSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rememberMeButton"
         app:trackThickness="4dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="163dp" />
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

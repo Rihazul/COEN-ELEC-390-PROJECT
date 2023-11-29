@@ -39,5 +39,4 @@
         android:drawableLeft="@drawable/baseline_linked_camera_24"
         android:textColor="@color/white"/>
 
-
 </LinearLayout>
