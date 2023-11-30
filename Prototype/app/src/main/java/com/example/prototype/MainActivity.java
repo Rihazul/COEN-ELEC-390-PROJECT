@@ -248,7 +248,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.profileInformation) {
             openProfileActivity();
         } else if (id == R.id.settings) {
-            openSettingsActivity();
+          openSettingsActivity();
+        } else if (id == R.id.aboutUs) {
+            goToAboutUsActivity();
+        } else if (id == R.id.contactInfo) {
+            goToContactInfoActivity();
+        } else if (id == R.id.disclaimer) {
+            goToDisclaimer();
         } else if (id == R.id.logout) {
             new LogoutConfirmationDialogFragment().show(getSupportFragmentManager(), "LogoutConfirmationDialogFragment");
         } else if (id == R.id.scanFace) {
@@ -341,6 +347,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         intent.putExtra("CAMERA DIRECTION", "Face Scan");
         startActivity(intent);
         finish();
+    }
+
+    private void goToAboutUsActivity() {
+        Intent intent = new Intent(getApplicationContext(), AboutUs.class);
+        startActivity(intent);
+    }
+
+    private void goToContactInfoActivity() {
+        Intent intent = new Intent(getApplicationContext(), ContactInfo.class);
+        startActivity(intent);
+    }
+
+    private void goToDisclaimer() {
+        Intent intent = new Intent(getApplicationContext(), Disclaimer.class);
+        startActivity(intent);
     }
 }
 

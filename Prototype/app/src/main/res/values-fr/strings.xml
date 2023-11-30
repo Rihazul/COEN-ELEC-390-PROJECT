@@ -91,4 +91,63 @@
     <string name="email">Address courriel</string>
     <string name="reset_password"> Réinitialiser le mot de passe</string>
     <string name="back"> Retourner </string>
+    <string name="scan_face">Scanner le visage</string>
+    <string name="not_now">Pas maintenant</string>
+
+    <string name="about_us">À propos de nous</string>
+    <string name="text_about_us">Nous sommes un groupe d\'étudiants en génie de l\'Université Concordia.
+        Cette application est un projet pour le cours de ELEC 390 dispensé par notre établissement.
+        Notre mission est de transformer la façon dont les familles vivent la sûreté et la sécurité grâce à
+        une technologie de pointe. Notre produit est conçu pour offrir aux familles un sentiment de protection et
+        de tranquillité d’esprit inégalé. Nous devons concevoir une application basée sur Android qui utilise des
+        dispositifs avancés de surveillance de capture de mouvement qui alerteront familles de tout mouvement détecté
+        dans les maisons. </string>
+
+    <string name="contact_info">Les Coordonnées</string>
+    <string name="contact_info_text"><![CDATA[
+
+    Les demandes générales:
+
+    \n\nSi votre compte est bloqué, si vous avez des questions sur les politiques ou les procédures, si vous ne savez pas vers qui vous tourner ou si vous avez des questions générales.
+
+    \n\n+1 (514) 000-0000
+    \n\nmotionsensor@doorwatch.ca]]></string>
+
+
+    <string name="disclaimer">Démenti</string>
+    <string name="text_disclaimer"><![CDATA[
+    \n\nAvant d\'utiliser l\'Application, veuillez lire et comprendre la clause de non-responsabilité suivante:
+
+    \n\nResponsabilité limitée:
+
+    \n\nL\'application est fournie \"telle quelle\" sans aucune garantie, expresse ou implicite. Notre équipe n\'assume aucune responsabilité quant à la fiabilité, l\'exactitude ou l\'exhaustivité du contenu capturé par la caméra de surveillance.
+
+    \n\n Conformité légale:
+
+    \n\nLes utilisateurs de l\'Application sont seuls responsables de s\'assurer que leur utilisation est conforme à toutes les lois et règlements. Cela inclut, sans toutefois s\'y limiter, les lois sur la confidentialité, les exigences de consentement et tout autre élément pertinent législation en matière de surveillance et de protection des données.
+
+    \n\nNe remplace pas les mesures de sécurité :
+
+    \n\nL\'application est destinée à améliorer la sécurité du domicile, mais elle ne remplace pas les mesures de sécurité pour d\'autres mesures de sécurité. Il est conseillé aux utilisateurs de mettre en œuvre une stratégie de sécurité complète, incluant mais non limité aux mesures de sécurité physique, aux alarmes et à la surveillance professionnelle.
+
+    \n\nSécurité du réseau et des appareils :
+
+    \n\nLes utilisateurs sont responsables d\'assurer la sécurité de leur réseau et des appareils connectés. Notre institution n\'est pas responsable de tout accès non autorisé à l\'Application ou aux données qu\'elle capture en raison d\'un sécurité du réseau ou des appareils.
+
+    \n\nConsidérations relatives à la confidentialité :
+
+    \n\nLes utilisateurs sont encouragés à respecter la vie privée des personnes capturées par la caméra de surveillance. Il est de la responsabilité de l\'utilisateur d\'obtenir tous les consentements et autorisations nécessaires requis par la loi avant d\'utiliser le Application.
+
+    \n\nStockage des données :
+
+    \n\nNous ne stockons ni n\'avons accès aux séquences vidéo capturées par la caméra de surveillance. Les données sont directement envoyé à l\'appareil téléphonique de l\'utilisateur. Il est conseillé aux utilisateurs de mettre en œuvre des mesures appropriées pour le stockage sécurisé des images capturées.
+
+    \n\nLimitations techniques :
+
+    \n\nL\'application peut avoir des limitations techniques, et nous ne garantissons pas un fonctionnement ininterrompu ou fonctionnement sans erreur. Les utilisateurs reconnaissent que les performances de l\'application peuvent être affectées par des facteurs autres que le contrôle de l\'équipe.
+
+    \n\nEn utilisant l\'Application, les utilisateurs acceptent l\'entière responsabilité de son utilisation et comprennent les limitations décrites dans cette clause de non-responsabilité. Nous nous réservons le droit de mettre à jour ou de modifier cette clause de non-responsabilité à tout moment.
+
+]]></string>
+
 </resources>
