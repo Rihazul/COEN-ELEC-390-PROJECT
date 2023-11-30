@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getUserInformation();
+
         final String[] homeId = {""};
 
         toolbar = findViewById(R.id.toolbar);
@@ -140,36 +142,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         devicesRecyclerView.setAdapter(adapter);
 
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null) {
-            String userId = currentUser.getUid();
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId);
-
-            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    User user = dataSnapshot.getValue(User.class);
-                    if (user != null) {
-                        String userFirstName = user.getFirstName();
-                        String userLastName = user.getLastName();
-                        String userEmail = user.getEmail();
-
-                        View headerView = navigationView.getHeaderView(0);
-                        userNameTextView = headerView.findViewById(R.id.navHeaderUserName);
-                        userEmailTextView = headerView.findViewById(R.id.navHeaderUserEmail);
-
-                        userNameTextView.setText(userFirstName + " " + userLastName);
-                        userEmailTextView.setText(userEmail);
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.w("MainActivity", "loadUser:onCancelled", databaseError.toException());
-                }
-            });
-        }
-
         connectDeviceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,6 +172,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onConfigurationChanged(newConfig);
         if (drawerToggle != null) {
             drawerToggle.onConfigurationChanged(newConfig);
+        }
+    }
+
+    public void getUserInformation() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId);
+
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null) {
+                        String userFirstName = user.getFirstName();
+                        String userLastName = user.getLastName();
+                        String userEmail = user.getEmail();
+
+                        View headerView = navigationView.getHeaderView(0);
+                        userNameTextView = headerView.findViewById(R.id.navHeaderUserName);
+                        userEmailTextView = headerView.findViewById(R.id.navHeaderUserEmail);
+
+                        userNameTextView.setText(userFirstName + " " + userLastName);
+                        userEmailTextView.setText(userEmail);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.w("MainActivity", "loadUser:onCancelled", databaseError.toException());
+                }
+            });
         }
     }
 

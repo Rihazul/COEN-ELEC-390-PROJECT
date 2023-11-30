@@ -6,21 +6,34 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient">
 
-    <TextView
-        android:id="@+id/profileTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Profile Information"
-        android:textAlignment="center"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        android:textColor="@color/deep_navy_blue"
-        app:layout_constraintBottom_toTopOf="@+id/editprofile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/teal_700"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/back_button"
+            android:padding="12dp"
+            android:src="@drawable/ic_back_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_information"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <TextView
         android:id="@+id/editprofile"
@@ -32,16 +45,15 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/editFirstName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.383"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.794" />
+        app:layout_constraintVertical_bias="0.683" />
 
     <EditText
         android:id="@+id/editFirstName"
         android:layout_width="325dp"
         android:layout_height="55dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/edittext_background"
         android:hint="First Name"
         android:inputType="text"
@@ -51,7 +63,7 @@
         app:layout_constraintBottom_toTopOf="@+id/editLastName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileTitle"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
@@ -88,12 +100,12 @@
         app:layout_constraintTop_toBottomOf="@+id/editLastName"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/editPasswordButton"
         android:layout_width="325dp"
         android:layout_height="55dp"
-        android:layout_marginTop="16dp"
         android:background="@drawable/button_gradient"
+        android:backgroundTint="@null"
         android:text="Edit Password"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/saveButton"
@@ -102,12 +114,12 @@
         app:layout_constraintTop_toBottomOf="@+id/editEmail"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/saveButton"
         android:layout_width="325dp"
         android:layout_height="55dp"
-        android:layout_marginTop="16dp"
         android:background="@drawable/button_gradient"
+        android:backgroundTint="@null"
         android:text="Save"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

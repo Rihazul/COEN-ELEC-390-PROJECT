@@ -1,9 +1,11 @@
 package com.example.prototype;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import android.view.View;
 
+import java.util.Objects;
+
 public class ProfileActivity extends AppCompatActivity {
 
     private EditText editFirstName;
@@ -30,6 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
     private EditText editEmail;
     private Button saveButton;
     private Button editPasswordButton;
+    private ImageButton backButton;
 
     private void getCurrentUserFromFirebase() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -62,12 +67,14 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         editFirstName = findViewById(R.id.editFirstName);
         editLastName = findViewById(R.id.editLastName);
         editEmail = findViewById(R.id.editEmail);
         saveButton = findViewById(R.id.saveButton);
         editPasswordButton = findViewById(R.id.editPasswordButton);
+        backButton = findViewById(R.id.backButton);
 
         // Call the method to retrieve and set user details
         getCurrentUserFromFirebase();
@@ -87,6 +94,13 @@ public class ProfileActivity extends AppCompatActivity {
                 // Show the "Edit Password" dialog
                 EditPasswordDialog editPasswordDialog = new EditPasswordDialog(ProfileActivity.this);
                 editPasswordDialog.show();
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToMainActivity();
             }
         });
     }
@@ -171,4 +185,8 @@ public class ProfileActivity extends AppCompatActivity {
         return !newFirstName.isEmpty() && !newLastName.isEmpty() && !newEmail.isEmpty();
     }
 
+    private void goToMainActivity() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    }
 }
