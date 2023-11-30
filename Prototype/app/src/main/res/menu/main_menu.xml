@@ -4,8 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
     <item android:title="@string/home_management">
+
+
+
         <menu>
             <group android:checkableBehavior="single">
+
+
+
+                <item android:id="@+id/aboutUs"
+                    android:title="@string/about_us"
+
+
+
+                    />
+
                 <item android:id="@+id/homeSettings"
                     android:title="@string/manage_homes"
                     android:icon="@drawable/baseline_home_24"
@@ -33,6 +46,18 @@
                     android:title="@string/settings"
                     android:icon="@drawable/baseline_settings_24"
                     />
+
+
+                <item android:id="@+id/contactInfo"
+                    android:title="@string/contact_info"
+                    android:icon="@drawable/img"
+                    />
+
+                <item android:id="@+id/disclaimer"
+                    android:title="@string/disclaimer"
+                    android:icon="@drawable/img"
+                    />
+
                 <item android:id="@+id/logout"
                     android:title="@string/logout"
                     android:icon="@drawable/baseline_logout_24"
