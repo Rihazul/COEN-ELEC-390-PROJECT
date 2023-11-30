@@ -147,15 +147,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onItemClick(int position) {
                 String deviceName = adapter.getDeviceNameAtPosition(position);
-
+                String deviceId = adapter.getDeviceIdAtPosition(position);
                 progressBar.setVisibility(View.VISIBLE);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
-                        goToLiveAlertsActivity();
+                        goToLiveAlertsActivity(deviceId, deviceName);
                     }
-                },3000);
+                },1000);
 
             }
         });
@@ -254,11 +253,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<String> deviceNamesList = new ArrayList<>();
+                List<String> deviceIdList = new ArrayList<>();
                 for (DataSnapshot deviceSnapshot : dataSnapshot.getChildren()) {
                     String deviceName = deviceSnapshot.getValue(String.class);
+                    String deviceId = deviceSnapshot.getKey();
                     deviceNamesList.add(deviceName);
+                    deviceIdList.add(deviceId);
                 }
-                adapter.updateDevicesList(deviceNamesList);
+                adapter.updateDevicesList(deviceNamesList, deviceIdList);
             }
 
             @Override
@@ -293,8 +295,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
     }
 
-    private void goToLiveAlertsActivity() {
+    private void goToLiveAlertsActivity(String deviceId, String deviceName) {
         Intent intent = new Intent(getApplicationContext(), LiveAlertsListActivity.class);
+        intent.putExtra("deviceId", deviceId);
+        intent.putExtra("deviceName", deviceName);
         startActivity(intent);
     }
 

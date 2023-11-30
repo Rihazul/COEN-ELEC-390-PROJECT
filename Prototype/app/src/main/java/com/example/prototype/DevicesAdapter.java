@@ -9,17 +9,20 @@ import android.widget.ImageButton;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceViewHolder> {
 
     private List<String> devicesList;
+    private List<String> devicesIdList;
     private LayoutInflater inflater;
     private OnItemClickListener listener;
 
     public DevicesAdapter(Context context, List<String> devicesList, OnItemClickListener listener) {
         this.inflater = LayoutInflater.from(context);
         this.devicesList = devicesList;
+        this.devicesIdList = new ArrayList<>();
         this.listener = listener;
     }
 
@@ -67,15 +70,22 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
         }
     }
 
-    public void updateDevicesList(List<String> newDevicesList) {
+    public void updateDevicesList(List<String> newDevicesList, List<String> newDevicesIdList) {
         devicesList.clear();
         devicesList.addAll(newDevicesList);
+        devicesIdList.clear();
+        devicesIdList.addAll(newDevicesIdList);
         notifyDataSetChanged();
     }
 
     public String getDeviceNameAtPosition(int position) {
         return devicesList.get(position);
     }
+
+    public String getDeviceIdAtPosition(int position) {
+        return devicesIdList.get(position);
+    }
+
 
     public interface OnItemClickListener {
         void onItemClick(int position);

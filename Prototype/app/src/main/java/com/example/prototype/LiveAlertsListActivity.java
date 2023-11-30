@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,7 @@ import java.util.Locale;
 public class LiveAlertsListActivity extends AppCompatActivity {
 
     private ImageButton backButton;
+    private TextView titleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,13 @@ public class LiveAlertsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_live_alerts_list_view);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+        String deviceId = getIntent().getStringExtra("deviceId");
+        String deviceName = getIntent().getStringExtra("deviceName");
+
         backButton = findViewById(R.id.backButton);
+        titleTextView = findViewById(R.id.titleTextView);
+
+        titleTextView.setText(deviceName);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,13 +57,11 @@ public class LiveAlertsListActivity extends AppCompatActivity {
             }
         });
 
-        fetchVideosAndSensorsFromFirebase();
+        fetchVideosAndSensorsFromFirebase(deviceId);
     }
 
-    private void fetchVideosAndSensorsFromFirebase() {
-        DatabaseReference videosRef = FirebaseDatabase.getInstance().getReference("videos");
-        DatabaseReference motionSensorRef = FirebaseDatabase.getInstance().getReference("sensors/motionSensor");
-        DatabaseReference usSensorRef = FirebaseDatabase.getInstance().getReference("sensors/usSensor");
+    private void fetchVideosAndSensorsFromFirebase(String deviceId) {
+        DatabaseReference videosRef = FirebaseDatabase.getInstance().getReference("devices/" + deviceId + "/recordings");
 
         videosRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -67,42 +73,6 @@ public class LiveAlertsListActivity extends AppCompatActivity {
                     if (cameraFootage != null) {
                         LiveAlert liveAlert = new LiveAlert();
                         liveAlert.setVideo(cameraFootage);
-
-                        motionSensorRef.orderByChild("date").equalTo(cameraFootage.getDate())
-                                .addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot motionSnapshot) {
-                                        for (DataSnapshot snap : motionSnapshot.getChildren()) {
-                                            Sensor motionSensor = snap.getValue(Sensor.class);
-                                            if (motionSensor != null && motionSensor.getTime().equals(cameraFootage.getTime())) {
-                                                liveAlert.setMotionSensor(motionSensor);
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                        Log.e(TAG, "Error fetching motion sensor data", error.toException());
-                                    }
-                                });
-
-                        usSensorRef.orderByChild("date").equalTo(cameraFootage.getDate())
-                                .addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot usSnapshot) {
-                                        for (DataSnapshot snap : usSnapshot.getChildren()) {
-                                            Sensor usSensor = snap.getValue(Sensor.class);
-                                            if (usSensor != null && usSensor.getTime().equals(cameraFootage.getTime())) {
-                                                liveAlert.setUsSensor(usSensor);
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                        Log.e(TAG, "Error fetching US sensor data", error.toException());
-                                    }
-                                });
 
                         liveAlerts.add(liveAlert);
                     }
