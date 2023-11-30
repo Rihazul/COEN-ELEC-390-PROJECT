@@ -94,4 +94,54 @@
     <string name="not_now">Not now</string>
     <string name="counter">Counter</string>
     <string name="device_settings">Device Settings</string>
+
+    <string name="about_us">About Us</string>
+    <string name="text_about_us">We are a small team of engineering students from Concordia University. This application is a project for the ELEC 390 course given by our institution. Our mission is to transform the way families experience safety and security through cutting-edge technology. Our product is designed to provide families with an unparalleled sense of protection and peace of mind. We are to design an android-based app that utilizes advanced motion capture monitoring devices that will alert families of any detected motion in houses. </string>
+
+    <string name="contact_info">Contact Information</string>
+    <string name="contact_info_text"><![CDATA[
+    General inquiries:
+
+    \n\nIf you have a block on your "account", questions about policies or procedures, are unsure where to turn to, or have general questions.
+
+    \n\n+1 (514) 000-0000
+    \n\nmotionsensor@doorwatch.ca
+    ]]></string>
+
+
+    <string name="disclaimer">Disclaimer</string>
+    <string name="text_disclaimer"><![CDATA[
+    Before using the Application, please read and understand the following disclaimer:
+
+    \n\nLimited Liability:
+
+    \n\nThe Application is provided \"as is\" without any warranties, expressed or implied. Our team assume no responsibility for the reliability, accuracy, or completeness of the content captured by the surveillance camera.
+
+    \n\nLegal Compliance:
+
+    \n\nUsers of the Application are solely responsible for ensuring that their use complies with all applicable laws and regulations. This includes but is not limited to privacy laws, consent requirements, and any other relevant legislation concerning surveillance and data protection.
+
+    \n\nNot a Substitute for Security Measures:
+
+    \n\nThe Application is intended to enhance home security, but it is not a substitute for other security measures. Users are advised to implement a comprehensive security strategy, including but not limited to physical security measures, alarms, and professional monitoring.
+
+    \n\nNetwork and Device Security:
+
+    \n\nUsers are responsible for ensuring the security of their network and connected devices. Our institution is not liable for any unauthorized access to the Application or the data it captures due to inadequate network or device security.
+
+    \n\nPrivacy Considerations:
+
+    \n\nUsers are encouraged to respect the privacy of individuals captured by the surveillance camera. It is the responsibility of the user to obtain any necessary consents and permissions required by law before using the Application.
+
+    \n\nData Storage:
+
+    \n\nWe do not store or have access to the video footage captured by the surveillance camera. The data is directly sent to the user\'s phone device. Users are advised to implement appropriate measures for the secure storage of the captured footage.
+
+    \n\nTechnical Limitations:
+
+    \n\nThe Application may have technical limitations, and we do not guarantee uninterrupted or error-free operation. Users acknowledge that the performance of the Application may be affected by factors beyond the team\'s control.
+
+    \n\nBy using the Application, users agree to accept all responsibility for its use and understand the limitations outlined in this disclaimer. We reserves the right to update or modify this disclaimer at any time.
+
+]]></string>
 </resources>
