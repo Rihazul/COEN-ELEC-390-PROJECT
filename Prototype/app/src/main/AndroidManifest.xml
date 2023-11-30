@@ -58,6 +58,9 @@
         <activity android:name=".AddDeviceManuallyActivity" />
         <activity android:name=".ConnectDeviceActivity" />
         <activity android:name=".IntermediateConnectDeviceActivity" />
+        <activity android:name=".AboutUs" />
+        <activity android:name=".Disclaimer"/>
+        <activity android:name=".ContactInfo" />
     </application>
 
 </manifest>
