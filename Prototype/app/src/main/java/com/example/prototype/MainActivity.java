@@ -36,6 +36,13 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -55,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getUserInformation();
 
         final String[] homeId = {""};
 
@@ -162,36 +171,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         devicesRecyclerView.setAdapter(adapter);
 
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null) {
-            String userId = currentUser.getUid();
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId);
-
-            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    User user = dataSnapshot.getValue(User.class);
-                    if (user != null) {
-                        String userFirstName = user.getFirstName();
-                        String userLastName = user.getLastName();
-                        String userEmail = user.getEmail();
-
-                        View headerView = navigationView.getHeaderView(0);
-                        userNameTextView = headerView.findViewById(R.id.navHeaderUserName);
-                        userEmailTextView = headerView.findViewById(R.id.navHeaderUserEmail);
-
-                        userNameTextView.setText(userFirstName + " " + userLastName);
-                        userEmailTextView.setText(userEmail);
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.w("MainActivity", "loadUser:onCancelled", databaseError.toException());
-                }
-            });
-        }
-
         connectDeviceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -225,6 +204,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    public void getUserInformation() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId);
+
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null) {
+                        String userFirstName = user.getFirstName();
+                        String userLastName = user.getLastName();
+                        String userEmail = user.getEmail();
+
+                        View headerView = navigationView.getHeaderView(0);
+                        userNameTextView = headerView.findViewById(R.id.navHeaderUserName);
+                        userEmailTextView = headerView.findViewById(R.id.navHeaderUserEmail);
+
+                        userNameTextView.setText(userFirstName + " " + userLastName);
+                        userEmailTextView.setText(userEmail);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.w("MainActivity", "loadUser:onCancelled", databaseError.toException());
+                }
+            });
+        }
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -234,14 +245,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.addHome) {
             goToAddHomeActivity();
         } else if (id == R.id.profileInformation) {
-
+            openProfileActivity();
         } else if (id == R.id.settings) {
-
+            openSettingsActivity();
         } else if (id == R.id.logout) {
             new LogoutConfirmationDialogFragment().show(getSupportFragmentManager(), "LogoutConfirmationDialogFragment");
         } else if (id == R.id.scanFace) {
             goToFaceScan();
         }
+
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -308,11 +320,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
+
+
     private void goToAddHomeActivity() {
         Intent intent = new Intent(getApplicationContext(), AddHomeActivity.class);
         intent.putExtra("isFirstHome", "False");
         startActivity(intent);
         finish();
+    }
+
+    private void openProfileActivity() {
+        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+        startActivity(intent);
+    }
+
+    private void openSettingsActivity() {
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        startActivity(intent);
     }
 
     private void goToFaceScan()
@@ -322,8 +346,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
         finish();
     }
-
-
 }
 
 
