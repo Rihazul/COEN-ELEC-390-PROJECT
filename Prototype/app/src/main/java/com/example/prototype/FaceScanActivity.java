@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -98,8 +100,11 @@ public class FaceScanActivity extends AppCompatActivity {
     private void uploadToFirebase(byte[] bb) {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String ownerUID = currentUser.getUid();
         String key = databaseReference.child("images").push().getKey();
-        StorageReference sr = myStorage.child("images").child(key+"_image"+".jpg");
+        //StorageReference sr = myStorage.child("images").child(key+"_image"+".jpg");
+        StorageReference sr = myStorage.child("images").child(ownerUID + ".jpg");
         sr.putBytes(bb).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

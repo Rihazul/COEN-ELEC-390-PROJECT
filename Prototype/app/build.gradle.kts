@@ -71,5 +71,4 @@ dependencies {
     //Add the dependency for the Realtime messaging
     implementation ("com.google.firebase:firebase-database:20.3.0")
     implementation ("com.google.firebase:firebase-inappmessaging:20.4.0")
-
 }
