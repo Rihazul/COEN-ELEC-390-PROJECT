@@ -149,5 +149,11 @@
     \n\nEn utilisant l\'Application, les utilisateurs acceptent l\'entière responsabilité de son utilisation et comprennent les limitations décrites dans cette clause de non-responsabilité. Nous nous réservons le droit de mettre à jour ou de modifier cette clause de non-responsabilité à tout moment.
 
 ]]></string>
+    <string-array name="language_options">
+        <item>English</item>
+        <item>Français</item>
+    </string-array>
+    <string name="language_english">English</string>
+    <string name="language_french">Français</string>
 
 </resources>

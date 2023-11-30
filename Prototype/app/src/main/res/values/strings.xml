@@ -144,4 +144,10 @@
     \n\nBy using the Application, users agree to accept all responsibility for its use and understand the limitations outlined in this disclaimer. We reserves the right to update or modify this disclaimer at any time.
 
 ]]></string>
+    <string-array name="language_options">
+        <item>English</item>
+        <item>Français</item>
+    </string-array>
+    <string name="language_english">English</string>
+    <string name="language_french">Français</string>
 </resources>
