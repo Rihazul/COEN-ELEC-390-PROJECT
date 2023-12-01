@@ -6,11 +6,9 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.Objects;
 
-public class CameraFootageDetailsActivity extends AppCompatActivity {
+public class CameraFootageDetailsActivity extends BaseActivity {
 
     private VideoView videoView;
     private TextView dateView;

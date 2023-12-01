@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class SelectHomeActivity extends AppCompatActivity {
+public class SelectHomeActivity extends BaseActivity {
     private Button nextButton;
     private Button cancelButton;
     private ImageButton backButton;

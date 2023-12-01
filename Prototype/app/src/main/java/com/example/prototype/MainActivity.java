@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -36,15 +35,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -163,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public void run() {
                         goToLiveAlertsActivity(deviceId, deviceName);
                     }
-                },1000);
+                }, 1000);
 
             }
         });
@@ -247,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.profileInformation) {
             openProfileActivity();
         } else if (id == R.id.settings) {
-          openSettingsActivity();
+            openSettingsActivity();
         } else if (id == R.id.aboutUs) {
             goToAboutUsActivity();
         } else if (id == R.id.contactInfo) {
@@ -327,7 +319,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
     private void goToAddHomeActivity() {
         Intent intent = new Intent(getApplicationContext(), AddHomeActivity.class);
         intent.putExtra("isFirstHome", "False");
@@ -345,8 +336,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
-    private void goToFaceScan()
-    {
+    private void goToFaceScan() {
         Intent intent = new Intent(getApplicationContext(), FaceScanActivity.class);
         intent.putExtra("CAMERA DIRECTION", "Face Scan");
         startActivity(intent);

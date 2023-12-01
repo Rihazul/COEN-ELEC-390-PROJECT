@@ -3,7 +3,6 @@ package com.example.prototype;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +15,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private final List<String> homeList;
     private final List<String> homeIdsList;
     private int selectedPosition = -1;
-    private String defaultHomeId;
+    private final String defaultHomeId;
 
     public HomeAdapter(List<String> homeList, List<String> homeIdsList, String defaultHomeId) {
         this.homeList = homeList;

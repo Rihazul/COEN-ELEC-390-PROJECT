@@ -19,10 +19,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class EditPasswordDialog extends Dialog {
 
-    private EditText currentPasswordEditText;
-    private EditText newPasswordEditText;
-    private EditText confirmPasswordEditText;
-    private Button updatePasswordButton;
+    private final EditText currentPasswordEditText;
+    private final EditText newPasswordEditText;
+    private final EditText confirmPasswordEditText;
+    private final Button updatePasswordButton;
 
     public EditPasswordDialog(@NonNull Context context) {
         super(context);

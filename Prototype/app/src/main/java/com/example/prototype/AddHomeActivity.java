@@ -9,22 +9,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class AddHomeActivity extends AppCompatActivity {
+public class AddHomeActivity extends BaseActivity {
 
     private TextView firstHomeTitle;
     private EditText homeNameInput;
@@ -45,11 +40,7 @@ public class AddHomeActivity extends AppCompatActivity {
         cancelButton = findViewById(R.id.cancelButton);
         addHomeButton = findViewById(R.id.addHomeButton);
 
-        if (isFirstHomeString.equals("True")) {
-            isFirstHome = true;
-        } else {
-            isFirstHome = false;
-        }
+        isFirstHome = isFirstHomeString.equals("True");
 
         setupUIForFirstHome(isFirstHome);
 
@@ -78,7 +69,7 @@ public class AddHomeActivity extends AppCompatActivity {
 
             int dpValue = 325;
             float d = getResources().getDisplayMetrics().density;
-            int width = (int)(dpValue * d);
+            int width = (int) (dpValue * d);
 
             ViewGroup.LayoutParams params = addHomeButton.getLayoutParams();
             params.width = width;
@@ -117,6 +108,7 @@ public class AddHomeActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), IntermediateConnectDeviceActivity.class);
         startActivity(intent);
     }
+
     private void goToMainActivity() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);

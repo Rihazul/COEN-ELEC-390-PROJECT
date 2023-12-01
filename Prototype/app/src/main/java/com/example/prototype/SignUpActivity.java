@@ -14,7 +14,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends BaseActivity {
     private EditText firstNameInput;
     private EditText lastNameInput;
     private EditText emailInput;
@@ -84,13 +83,14 @@ public class SignUpActivity extends AppCompatActivity {
                             progressIndicator.setVisibility(View.GONE);
                         }
                     }
-                },4000);
+                }, 4000);
             }
         });
 
         passwordInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -98,13 +98,15 @@ public class SignUpActivity extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
 
         confirmPasswordInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -112,7 +114,8 @@ public class SignUpActivity extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         rememberMeButton.setOnClickListener(new View.OnClickListener() {
@@ -142,7 +145,7 @@ public class SignUpActivity extends AppCompatActivity {
         if (user.getFirstName().isEmpty() || user.getLastName().isEmpty()) {
             firstNameInput.setError(getString(R.string.name_can_not_be_empty));
             lastNameInput.setError(getString(R.string.name_can_not_be_empty));
-            isValid =  false;
+            isValid = false;
         }
 
         if (!user.getEmail().matches(emailPattern)) {
@@ -177,7 +180,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (!user.getPassword().equals(confirmPassword)) {
             confirmPasswordInputLayout.setError(getString(R.string.passwords_do_not_match));
-             isValid = false;
+            isValid = false;
         }
 
         return isValid;
@@ -191,14 +194,12 @@ public class SignUpActivity extends AppCompatActivity {
                         mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful())
-                                {
-                                    Toast.makeText(SignUpActivity.this, R.string.registered_successfully_please_check_your_email_for_verification,Toast.LENGTH_LONG).show();
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(SignUpActivity.this, R.string.registered_successfully_please_check_your_email_for_verification, Toast.LENGTH_LONG).show();
                                     emailInput.setText("");
                                     passwordInput.setText("");
-                                }
-                                else {
-                                    Toast.makeText(SignUpActivity.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
 
                                 }
                             }
@@ -212,7 +213,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     .addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
                                             //goToAddHomeActivity();
-                                            Toast.makeText(SignUpActivity.this, R.string.verify_the_email_before_joining_in,Toast.LENGTH_LONG).show();
+                                            Toast.makeText(SignUpActivity.this, R.string.verify_the_email_before_joining_in, Toast.LENGTH_LONG).show();
                                             goToSignInActivity();
                                         } else {
                                             Toast.makeText(SignUpActivity.this, R.string.failed_to_save_user_profile_information_please_try_again, Toast.LENGTH_SHORT).show();

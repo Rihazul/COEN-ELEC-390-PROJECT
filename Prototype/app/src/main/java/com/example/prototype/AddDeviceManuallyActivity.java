@@ -7,11 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.Objects;
 
-public class AddDeviceManuallyActivity extends AppCompatActivity {
+public class AddDeviceManuallyActivity extends BaseActivity {
 
     private EditText deviceCodeInput;
     private Button nextButton;

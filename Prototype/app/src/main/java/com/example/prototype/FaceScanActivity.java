@@ -1,8 +1,5 @@
 package com.example.prototype;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -10,12 +7,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,7 +28,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
-public class FaceScanActivity extends AppCompatActivity {
+public class FaceScanActivity extends BaseActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private StorageReference myStorage;
@@ -61,39 +59,37 @@ public class FaceScanActivity extends AppCompatActivity {
         });
 
 
-       captureButton.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
+        captureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-               Intent intent= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-               startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
-           }
-       });
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+            }
+        });
     }
 
-    protected void onActivityResult(int requestCode,int resultCode,Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==REQUEST_IMAGE_CAPTURE && resultCode== RESULT_OK)
-        {
-                onCaptureResult(data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            onCaptureResult(data);
         }
 
     }
 
-    private void onCaptureResult(Intent data)
-    {
-        int targetHeight =imageView.getHeight();
+    private void onCaptureResult(Intent data) {
+        int targetHeight = imageView.getHeight();
         int targetWidth = imageView.getWidth();
-        Bitmap thumbnail =(Bitmap) data.getExtras().get("data");
-        thumbnail=resizeBitmap(thumbnail,targetWidth,targetHeight);
-        ByteArrayOutputStream bytes= new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG,70,bytes);
-        byte bb[] = bytes.toByteArray();
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        thumbnail = resizeBitmap(thumbnail, targetWidth, targetHeight);
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 70, bytes);
+        byte[] bb = bytes.toByteArray();
         String file = Base64.encodeToString(bb, Base64.DEFAULT);
         imageView.setImageBitmap(thumbnail);
-        
+
         uploadToFirebase(bb);
     }
 
@@ -108,13 +104,13 @@ public class FaceScanActivity extends AppCompatActivity {
         sr.putBytes(bb).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(FaceScanActivity.this,"Image Uploaded Successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FaceScanActivity.this, "Image Uploaded Successfully!", Toast.LENGTH_SHORT).show();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(FaceScanActivity.this,"Upload Failed 👎", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FaceScanActivity.this, "Upload Failed 👎", Toast.LENGTH_SHORT).show();
             }
         });
     }

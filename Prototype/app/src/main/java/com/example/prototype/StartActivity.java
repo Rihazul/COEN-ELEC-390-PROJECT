@@ -7,14 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
-public class StartActivity extends AppCompatActivity {
+public class StartActivity extends BaseActivity {
     private Button signInButton;
     private Button signUpButton;
     private FirebaseAuth mAuth;

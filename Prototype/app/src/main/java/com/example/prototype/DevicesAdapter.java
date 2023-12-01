@@ -14,10 +14,10 @@ import java.util.List;
 
 public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceViewHolder> {
 
-    private List<String> devicesList;
-    private List<String> devicesIdList;
-    private LayoutInflater inflater;
-    private OnItemClickListener listener;
+    private final List<String> devicesList;
+    private final List<String> devicesIdList;
+    private final LayoutInflater inflater;
+    private final OnItemClickListener listener;
 
     public DevicesAdapter(Context context, List<String> devicesList, OnItemClickListener listener) {
         this.inflater = LayoutInflater.from(context);
@@ -41,6 +41,26 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
     @Override
     public int getItemCount() {
         return devicesList.size();
+    }
+
+    public void updateDevicesList(List<String> newDevicesList, List<String> newDevicesIdList) {
+        devicesList.clear();
+        devicesList.addAll(newDevicesList);
+        devicesIdList.clear();
+        devicesIdList.addAll(newDevicesIdList);
+        notifyDataSetChanged();
+    }
+
+    public String getDeviceNameAtPosition(int position) {
+        return devicesList.get(position);
+    }
+
+    public String getDeviceIdAtPosition(int position) {
+        return devicesIdList.get(position);
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
     }
 
     public static class DeviceViewHolder extends RecyclerView.ViewHolder {
@@ -68,26 +88,5 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DeviceVi
                 }
             });
         }
-    }
-
-    public void updateDevicesList(List<String> newDevicesList, List<String> newDevicesIdList) {
-        devicesList.clear();
-        devicesList.addAll(newDevicesList);
-        devicesIdList.clear();
-        devicesIdList.addAll(newDevicesIdList);
-        notifyDataSetChanged();
-    }
-
-    public String getDeviceNameAtPosition(int position) {
-        return devicesList.get(position);
-    }
-
-    public String getDeviceIdAtPosition(int position) {
-        return devicesIdList.get(position);
-    }
-
-
-    public interface OnItemClickListener {
-        void onItemClick(int position);
     }
 }

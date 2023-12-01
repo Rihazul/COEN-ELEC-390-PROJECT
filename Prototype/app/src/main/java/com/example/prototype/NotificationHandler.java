@@ -2,15 +2,18 @@ package com.example.prototype;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Build;
-import java.util.Random;
+import android.widget.Toast;
+
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import android.app.PendingIntent;
-import android.widget.Toast;
+
+import java.util.Random;
+
 public class NotificationHandler {
 
     private static final String CHANNEL_ID = "alert_channel";

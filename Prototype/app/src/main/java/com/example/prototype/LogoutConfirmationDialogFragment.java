@@ -21,8 +21,9 @@ public class LogoutConfirmationDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.yes, (dialog, which) -> {
                     FirebaseAuth.getInstance().signOut();
                     goToStartActivity();
-                } )
-                .setNegativeButton(R.string.cancel, (dialog, which) -> {})
+                })
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                })
                 .create();
     }
 

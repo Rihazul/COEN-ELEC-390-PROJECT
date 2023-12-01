@@ -5,13 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.Objects;
 
-public class IntermediateConnectDeviceActivity extends AppCompatActivity {
+public class IntermediateConnectDeviceActivity extends BaseActivity {
     private Button notNow;
     private Button next;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +39,7 @@ public class IntermediateConnectDeviceActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), SelectHomeActivity.class);
         startActivity(intent);
     }
+
     private void goToMainActivity() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
