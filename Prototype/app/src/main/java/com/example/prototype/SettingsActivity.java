@@ -7,12 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.prototype.R;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.util.Locale;
 import java.util.Objects;
@@ -22,15 +23,18 @@ public class SettingsActivity extends AppCompatActivity {
     private ImageButton backButton;
     private Spinner languageSpinner;
     private boolean userHasInteracted = false;
+    private Switch darkModeToggle;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadUiMode();
         setContentView(R.layout.activity_settings);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         languageSpinner = findViewById(R.id.language_spinner);
+        darkModeToggle = findViewById(R.id.darkModeToggle);
         backButton = findViewById(R.id.backButton);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -58,6 +62,20 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        boolean isDarkMode = prefs.getBoolean("DarkMode", false);
+
+        darkModeToggle.setOnCheckedChangeListener(null);
+
+        darkModeToggle.setChecked(isDarkMode);
+        darkModeToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (buttonView.isPressed()) {
+                    changeUiMode(isChecked);
+                }
+            }
+        });
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +83,36 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void changeUiMode(boolean isDarkMode) {
+        int currentMode = AppCompatDelegate.getDefaultNightMode();
+        if ((isDarkMode && currentMode != AppCompatDelegate.MODE_NIGHT_YES) ||
+                (!isDarkMode && currentMode != AppCompatDelegate.MODE_NIGHT_NO)) {
+
+            SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("DarkMode", isDarkMode);
+            editor.apply();
+
+            if(isDarkMode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        }
+    }
+
+    private void loadUiMode() {
+        SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
+        boolean isDarkMode = prefs.getBoolean("DarkMode", false);
+
+        if(isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+
 
     @Override
     public void onUserInteraction() {
