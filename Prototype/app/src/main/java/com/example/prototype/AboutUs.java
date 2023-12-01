@@ -1,16 +1,12 @@
 package com.example.prototype;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import androidx.appcompat.app.AppCompatActivity;
-import com.example.prototype.R;
-
 import java.util.Objects;
 
-public class AboutUs extends AppCompatActivity{
+public class AboutUs extends BaseActivity {
 
     private ImageButton backButton;
 

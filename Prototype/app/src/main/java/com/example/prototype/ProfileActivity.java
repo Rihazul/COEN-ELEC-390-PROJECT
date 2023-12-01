@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,11 +22,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import android.view.View;
 
 import java.util.Objects;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends BaseActivity {
 
     private EditText editFirstName;
     private EditText editLastName;
@@ -57,7 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     // Handle the error
-                    Toast.makeText(ProfileActivity.this, "Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileActivity.this, (R.string.error) + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -123,15 +121,15 @@ public class ProfileActivity extends AppCompatActivity {
                     userReference.child("email").setValue(newEmail);
 
                     // Display a success message to the user
-                    Toast.makeText(ProfileActivity.this, "User details updated successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileActivity.this, getString(R.string.user_details_updated_successfully), Toast.LENGTH_SHORT).show();
                 }
             } else {
                 // Display an error message for invalid email
-                Toast.makeText(ProfileActivity.this, "Invalid email address", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this, getString(R.string.invalid_email_address), Toast.LENGTH_SHORT).show();
             }
         } else {
             // Display an error message for other invalid information
-            Toast.makeText(ProfileActivity.this, "Invalid information, please check and try again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfileActivity.this, getString(R.string.invalid_information_please_check_and_try_again), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -157,16 +155,16 @@ public class ProfileActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 // Password updated successfully
-                                                Toast.makeText(ProfileActivity.this, "Password updated successfully", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ProfileActivity.this, getString(R.string.password_updated_successfully), Toast.LENGTH_SHORT).show();
                                             } else {
                                                 // Handle the error
-                                                Toast.makeText(ProfileActivity.this, "Failed to update password: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ProfileActivity.this, getString(R.string.failed_to_update_password) + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
                         } else {
                             // Reauthentication failed, handle the error
-                            Toast.makeText(ProfileActivity.this, "Reauthentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProfileActivity.this, getString(R.string.reauthentication_failed) + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

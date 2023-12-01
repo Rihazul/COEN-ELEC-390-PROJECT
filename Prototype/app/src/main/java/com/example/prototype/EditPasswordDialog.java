@@ -19,10 +19,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class EditPasswordDialog extends Dialog {
 
-    private EditText currentPasswordEditText;
-    private EditText newPasswordEditText;
-    private EditText confirmPasswordEditText;
-    private Button updatePasswordButton;
+    private final EditText currentPasswordEditText;
+    private final EditText newPasswordEditText;
+    private final EditText confirmPasswordEditText;
+    private final Button updatePasswordButton;
 
     public EditPasswordDialog(@NonNull Context context) {
         super(context);
@@ -51,13 +51,13 @@ public class EditPasswordDialog extends Dialog {
         // Validate the entered passwords
         if (validatePasswords(currentPassword, newPassword, confirmPassword)) {
             // For demonstration purposes, show a toast message
-            Toast.makeText(getContext(), "Password updated successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), (R.string.password_updated_successfully), Toast.LENGTH_SHORT).show();
 
             // Dismiss the dialog
             dismiss();
         } else {
             // Display an error message for invalid passwords
-            Toast.makeText(getContext(), "Invalid passwords, please check and try again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), (R.string.invalid_passwords_please_check_and_try_again), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -107,11 +107,11 @@ public class EditPasswordDialog extends Dialog {
                                     dismiss();
                                 } else {
                                     // Display an error message for invalid passwords
-                                    Toast.makeText(getContext(), "Invalid passwords, please check and try again", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), (R.string.invalid_passwords_please_check_and_try_again), Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 // Display an error message for incorrect current password
-                                Toast.makeText(getContext(), "Incorrect current password, please try again", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), (R.string.incorrect_current_password_please_try_again), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

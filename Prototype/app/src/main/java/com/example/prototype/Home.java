@@ -1,8 +1,6 @@
 package com.example.prototype;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Home {
@@ -41,6 +39,6 @@ public class Home {
     }
 
     public void addMember(String userID, String member) {
-        members.put(userID, member);;
+        members.put(userID, member);
     }
 }

@@ -13,9 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -29,11 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
-public class SignInActivity extends AppCompatActivity {
-
-    interface FirstHomeCheckCallback {
-        void onCheckCompleted(boolean isFirstHome);
-    }
+public class SignInActivity extends BaseActivity {
 
     private EditText emailInput;
     private EditText passwordInput;
@@ -80,7 +74,7 @@ public class SignInActivity extends AppCompatActivity {
                             progressIndicator.setVisibility(View.GONE);
                         }
                     }
-                },2000);
+                }, 2000);
             }
         });
 
@@ -131,27 +125,29 @@ public class SignInActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        if(mAuth.getCurrentUser().isEmailVerified())
-                            {
-                                determineIfFirstHome(isFirstHome -> {
-                                    this.isFirstHome = isFirstHome;
-                                    if (this.isFirstHome) {
-                                        goToAddHomeActivity();
-                                    } else {
-                                        goToMainActivity();
-                                    }
-                                });
-                            }
-                        else {
+                        if (mAuth.getCurrentUser().isEmailVerified()) {
+                            determineIfFirstHome(isFirstHome -> {
+                                this.isFirstHome = isFirstHome;
+                                if (this.isFirstHome) {
+                                    goToAddHomeActivity();
+                                } else {
+                                    goToMainActivity();
+                                }
+                            });
+                        } else {
                             Toast.makeText(SignInActivity.this, R.string.please_verify_your_email_address, Toast.LENGTH_LONG).show();
+                            progressIndicator.setVisibility(View.GONE);
                         }
                     } else {
                         if (task.getException() instanceof FirebaseAuthInvalidUserException) {
                             Toast.makeText(SignInActivity.this, R.string.account_not_found_please_sign_up, Toast.LENGTH_SHORT).show();
+                            progressIndicator.setVisibility(View.GONE);
                         } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                             Toast.makeText(SignInActivity.this, R.string.invalid_credentials_please_try_again, Toast.LENGTH_SHORT).show();
+                            progressIndicator.setVisibility(View.GONE);
                         } else {
                             Toast.makeText(SignInActivity.this, R.string.authentication_failed, Toast.LENGTH_SHORT).show();
+                            progressIndicator.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -184,15 +180,19 @@ public class SignInActivity extends AppCompatActivity {
         finish();
     }
 
-    private void setForgotPasswordActivity(){
-        Intent intent= new Intent(getApplicationContext(),ForgetPassword.class);
+    private void setForgotPasswordActivity() {
+        Intent intent = new Intent(getApplicationContext(), ForgetPassword.class);
         startActivity(intent);
         finish();
     }
 
     private void goToMainActivity() {
-        Intent intent= new Intent(getApplicationContext(),MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
-        finish();;
+        finish();
+    }
+
+    interface FirstHomeCheckCallback {
+        void onCheckCompleted(boolean isFirstHome);
     }
 }

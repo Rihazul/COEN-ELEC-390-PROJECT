@@ -1,12 +1,8 @@
 package com.example.prototype;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-import com.journeyapps.barcodescanner.CaptureActivity;
-
-public class CaptureQRcodePortrait extends CaptureActivity {
+public class CaptureQRcodePortrait extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

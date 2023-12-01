@@ -10,13 +10,11 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 
 import java.util.Objects;
 
-public class LiveAlertsDetailsActivity extends AppCompatActivity {
+public class LiveAlertsDetailsActivity extends BaseActivity {
     private VideoView videoView;
     private TextView dateTextView;
     private TextView timeTextView;

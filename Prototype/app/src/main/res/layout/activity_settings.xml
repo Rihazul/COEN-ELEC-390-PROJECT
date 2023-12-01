@@ -35,43 +35,94 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <TextView
+        android:id="@+id/language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Language"
+        android:textColor="@color/deep_navy_blue"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintVertical_bias="0.037" />
+
+    <Spinner
+        android:id="@+id/language_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/language"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintVertical_bias="0.029" />
+
+    <TextView
+        android:id="@+id/darkMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dark_mode"
+        android:textColor="@color/deep_navy_blue"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/language"
+        app:layout_constraintVertical_bias="0.04" />
+
+    <Switch
+        android:id="@+id/darkModeToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintStart_toEndOf="@+id/darkMode"
+        app:layout_constraintTop_toBottomOf="@+id/language_spinner"
+        app:layout_constraintVertical_bias="0.04" />
+
     <Button
         android:id="@+id/btnAppVersion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="325dp"
+        android:layout_height="55dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:background="@android:color/transparent"
-        android:text="App Version/Update"
+        android:text="@string/app_version_update"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/btnHelpSupport"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch1" />
+        app:layout_constraintTop_toBottomOf="@+id/darkModeToggle" />
 
     <Button
         android:id="@+id/btnHelpSupport"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Help and Support"
-        android:textColor="@android:color/black"
-        android:background="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAppVersion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btnDeleteAccount"
-        android:layout_marginTop="8dp"
+        android:layout_width="325dp"
+        android:layout_height="55dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp" />
-
-    <Button
-        android:id="@+id/btnDeleteAccount"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Delete Account"
-        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:background="@android:color/transparent"
+        android:text="@string/help_and_support"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/btnDeleteAccount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAppVersion" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDeleteAccount"
+        android:layout_width="325dp"
+        android:layout_height="55dp"
+        android:text="@string/delete_account"
+        android:textColor="@android:color/black"
+        android:background="#57f2e8"
         app:layout_constraintTop_toBottomOf="@+id/btnHelpSupport"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,21 +131,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp" />
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Switch"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
-        app:layout_constraintVertical_bias="0.067" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 

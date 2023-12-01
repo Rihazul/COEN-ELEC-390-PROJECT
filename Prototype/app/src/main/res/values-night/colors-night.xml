@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark theme colors -->
+    <color name="purple_200">#663700B3</color> <!-- Much darker variant -->
+    <color name="purple_500">#CC6200EE</color> <!-- Darker variant -->
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#232222</color>
+    <color name="teal_700">#151515</color>
+    <color name="black">#FFFFFFFF</color> <!-- Invert black and white -->
+    <color name="white">#494949</color> <!-- Invert black and white -->
+    <color name="deep_navy_blue">#FFFFFFFF</color> <!-- Lighter variant -->
+    <color name="light_purple">#FFBB86FC</color> <!-- Lighter variant -->
+    <color name="dark_purple">#FF6200EE</color> <!-- Lighter variant -->
+    <color name="lighter_navy_blue">#FFBB86FC</color> <!-- Lighter variant -->
+    <color name="dark_blue">#001F3F</color>
+    <color name="light_blue">#FFBB86FC</color> <!-- Lighter variant -->
+    <color name="light_grey">#BDBDBD</color> <!-- Lighter grey -->
+    <color name="error_color">#FF8A80</color> <!-- Lighter error color -->
+    <color name="gradientColor">#FF232222</color>
+</resources>

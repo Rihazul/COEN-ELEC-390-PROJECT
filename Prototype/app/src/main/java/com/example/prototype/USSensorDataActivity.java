@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class USSensorDataActivity extends AppCompatActivity {
+public class USSensorDataActivity extends BaseActivity {
 
     private ImageButton backButton;
 

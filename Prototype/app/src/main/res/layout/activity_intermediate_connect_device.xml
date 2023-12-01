@@ -25,7 +25,7 @@
         android:id="@+id/connectYourDevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Press next to continue"
+        android:text="@string/press_next_to_continue"
         android:textColor="@color/deep_navy_blue"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

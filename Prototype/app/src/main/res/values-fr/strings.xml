@@ -93,6 +93,20 @@
     <string name="back"> Retourner </string>
     <string name="scan_face">Scanner le visage</string>
     <string name="not_now">Pas maintenant</string>
+    <string name="counter">Compteur</string>
+    <string name="device_settings">Réglages de l\'appareil</string>
+    <string name="app_info">Info de l\'application</string>
+    <string name="language">Langue</string>
+    <string name="dark_mode">Mode Sombre</string>
+    <string name="app_version">VERSION/MISE À JOUR </string>
+    <string name="help_and_support">AIDE ET SOUTIEN</string>
+    <string name="delete_acc">SUPPRIMER LE COMPTE</string>
+    <string name="save">Sauvegarder</string>
+    <string name="edit_password">Modifier le mot de passe</string>
+    <string name="edit_message">Modifiez les informations de votre profil ici</string>
+    <string name="current_password">Mot de passe actuel</string>
+    <string name="new_password">Nouveau mot de passe</string>
+    <string name="update_password">Changer le mot de passe</string>
 
     <string name="about_us">À propos de nous</string>
     <string name="text_about_us">Nous sommes un groupe d\'étudiants en génie de l\'Université Concordia.
@@ -149,5 +163,12 @@
     \n\nEn utilisant l\'Application, les utilisateurs acceptent l\'entière responsabilité de son utilisation et comprennent les limitations décrites dans cette clause de non-responsabilité. Nous nous réservons le droit de mettre à jour ou de modifier cette clause de non-responsabilité à tout moment.
 
 ]]></string>
+    <string-array name="language_options">
+        <item>English</item>
+        <item>Français</item>
+    </string-array>
+    <string name="language_english">English</string>
+    <string name="language_french">Français</string>
+    <string name="press_next_to_continue">Clicker pour continuer</string>
 
 </resources>

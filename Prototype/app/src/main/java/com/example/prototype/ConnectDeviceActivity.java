@@ -7,14 +7,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
-public class ConnectDeviceActivity extends AppCompatActivity {
+public class ConnectDeviceActivity extends BaseActivity {
 
     private EditText deviceNameInput;
     private Button connectDeviceButton;

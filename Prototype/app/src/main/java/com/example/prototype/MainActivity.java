@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -36,15 +35,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -156,15 +148,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onItemClick(int position) {
                 String deviceName = adapter.getDeviceNameAtPosition(position);
-
-                progressBar.setVisibility(View.VISIBLE);
+                String deviceId = adapter.getDeviceIdAtPosition(position);
+                progressBar.setVisibility(View.GONE);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
-                        goToLiveAlertsActivity();
+                        goToLiveAlertsActivity(deviceId, deviceName);
                     }
-                },3000);
+                }, 1000);
 
             }
         });
@@ -248,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.profileInformation) {
             openProfileActivity();
         } else if (id == R.id.settings) {
-          openSettingsActivity();
+            openSettingsActivity();
         } else if (id == R.id.aboutUs) {
             goToAboutUsActivity();
         } else if (id == R.id.contactInfo) {
@@ -272,11 +263,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<String> deviceNamesList = new ArrayList<>();
+                List<String> deviceIdList = new ArrayList<>();
                 for (DataSnapshot deviceSnapshot : dataSnapshot.getChildren()) {
                     String deviceName = deviceSnapshot.getValue(String.class);
+                    String deviceId = deviceSnapshot.getKey();
                     deviceNamesList.add(deviceName);
+                    deviceIdList.add(deviceId);
                 }
-                adapter.updateDevicesList(deviceNamesList);
+                adapter.updateDevicesList(deviceNamesList, deviceIdList);
             }
 
             @Override
@@ -311,8 +305,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
     }
 
-    private void goToLiveAlertsActivity() {
+    private void goToLiveAlertsActivity(String deviceId, String deviceName) {
         Intent intent = new Intent(getApplicationContext(), LiveAlertsListActivity.class);
+        intent.putExtra("deviceId", deviceId);
+        intent.putExtra("deviceName", deviceName);
         startActivity(intent);
     }
 
@@ -321,7 +317,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         intent.putExtra("homeId", homeId);
         startActivity(intent);
     }
-
 
 
     private void goToAddHomeActivity() {
@@ -341,8 +336,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
-    private void goToFaceScan()
-    {
+    private void goToFaceScan() {
         Intent intent = new Intent(getApplicationContext(), FaceScanActivity.class);
         intent.putExtra("CAMERA DIRECTION", "Face Scan");
         startActivity(intent);
