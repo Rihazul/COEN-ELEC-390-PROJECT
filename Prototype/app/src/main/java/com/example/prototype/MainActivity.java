@@ -149,7 +149,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             public void onItemClick(int position) {
                 String deviceName = adapter.getDeviceNameAtPosition(position);
                 String deviceId = adapter.getDeviceIdAtPosition(position);
-                progressBar.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
