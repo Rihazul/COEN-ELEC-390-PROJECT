@@ -83,7 +83,7 @@ public class SignUpActivity extends BaseActivity {
                             progressIndicator.setVisibility(View.GONE);
                         }
                     }
-                }, 4000);
+                }, 2000);
             }
         });
 

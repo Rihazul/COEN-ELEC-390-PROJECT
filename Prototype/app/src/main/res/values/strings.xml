@@ -94,6 +94,18 @@
     <string name="not_now">Not now</string>
     <string name="counter">Counter</string>
     <string name="device_settings">Device Settings</string>
+    <string name="app_info">App Info</string>
+    <string name="language">Language</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="app_version">APP VERSION/UPDATE</string>
+    <string name="help_and_support">HELP AND SUPPORT</string>
+    <string name="delete_acc">DELETE ACCOUNT</string>
+    <string name="save">Save</string>
+    <string name="edit_password">Edit Password</string>
+    <string name="edit_message">Edit Your Profile Information Here</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="update_password">Update Password</string>
 
     <string name="about_us">About Us</string>
     <string name="text_about_us">We are a small team of engineering students from Concordia University. This application is a project for the ELEC 390 course given by our institution. Our mission is to transform the way families experience safety and security through cutting-edge technology. Our product is designed to provide families with an unparalleled sense of protection and peace of mind. We are to design an android-based app that utilizes advanced motion capture monitoring devices that will alert families of any detected motion in houses. </string>

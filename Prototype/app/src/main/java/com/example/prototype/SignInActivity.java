@@ -136,14 +136,18 @@ public class SignInActivity extends BaseActivity {
                             });
                         } else {
                             Toast.makeText(SignInActivity.this, R.string.please_verify_your_email_address, Toast.LENGTH_LONG).show();
+                            progressIndicator.setVisibility(View.GONE);
                         }
                     } else {
                         if (task.getException() instanceof FirebaseAuthInvalidUserException) {
                             Toast.makeText(SignInActivity.this, R.string.account_not_found_please_sign_up, Toast.LENGTH_SHORT).show();
+                            progressIndicator.setVisibility(View.GONE);
                         } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                             Toast.makeText(SignInActivity.this, R.string.invalid_credentials_please_try_again, Toast.LENGTH_SHORT).show();
+                            progressIndicator.setVisibility(View.GONE);
                         } else {
                             Toast.makeText(SignInActivity.this, R.string.authentication_failed, Toast.LENGTH_SHORT).show();
+                            progressIndicator.setVisibility(View.GONE);
                         }
                     }
                 });

@@ -57,7 +57,7 @@ public class ForgetPassword extends BaseActivity {
                             progressBar.setVisibility(View.GONE);
                         }
                     }
-                }, 4000);
+                }, 2000);
             }
         });
 

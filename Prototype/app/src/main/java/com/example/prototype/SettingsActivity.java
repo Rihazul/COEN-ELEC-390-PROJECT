@@ -1,5 +1,6 @@
 package com.example.prototype;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -7,12 +8,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Locale;
 import java.util.Objects;
@@ -23,6 +33,8 @@ public class SettingsActivity extends BaseActivity {
     private Spinner languageSpinner;
     private boolean userHasInteracted = false;
     private Switch darkModeToggle;
+    private Button delete_account;
+    FirebaseUser firebaseUser;
 
 
     @Override
@@ -35,6 +47,8 @@ public class SettingsActivity extends BaseActivity {
         languageSpinner = findViewById(R.id.language_spinner);
         darkModeToggle = findViewById(R.id.darkModeToggle);
         backButton = findViewById(R.id.backButton);
+        delete_account= findViewById(R.id.btnDeleteAccount);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.language_options, android.R.layout.simple_spinner_item);
@@ -79,6 +93,44 @@ public class SettingsActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 goToMainActivity();
+            }
+        });
+
+        delete_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(SettingsActivity.this);
+                dialog.setTitle("Are you really sure?");
+                dialog.setMessage("Deleting this account will result in completely removing and wiping your " +
+                        "account from the system and you won't be able to access the app.");
+                dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful())
+                                {
+                                    Toast.makeText(SettingsActivity.this,"Account Deleted Successfully !",Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(SettingsActivity.this,SignInActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+                                }
+                                else {
+                                    Toast.makeText(SettingsActivity.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    }
+                }).setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alertDialog = dialog.create();
+                alertDialog.show();
             }
         });
     }
