@@ -169,5 +169,6 @@
     </string-array>
     <string name="language_english">English</string>
     <string name="language_french">Français</string>
+    <string name="press_next_to_continue">Clicker pour continuer</string>
 
 </resources>

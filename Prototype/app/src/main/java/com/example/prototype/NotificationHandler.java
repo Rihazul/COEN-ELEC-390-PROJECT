@@ -76,7 +76,7 @@ public class NotificationHandler {
 
     private static void showNotificationPermissionExplanation(Context context) {
 
-        Toast.makeText(context, "Please enable notifications for this app in the device settings", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, (R.string.please_enable_notifications_for_this_app_in_the_device_settings), Toast.LENGTH_LONG).show();
 
     }
 }
