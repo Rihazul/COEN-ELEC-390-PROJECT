@@ -104,13 +104,13 @@ public class FaceScanActivity extends BaseActivity {
         sr.putBytes(bb).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(FaceScanActivity.this, "Image Uploaded Successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FaceScanActivity.this, (R.string.image_uploaded_successfully), Toast.LENGTH_SHORT).show();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(FaceScanActivity.this, "Upload Failed 👎", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FaceScanActivity.this, (R.string.upload_failed), Toast.LENGTH_SHORT).show();
             }
         });
     }

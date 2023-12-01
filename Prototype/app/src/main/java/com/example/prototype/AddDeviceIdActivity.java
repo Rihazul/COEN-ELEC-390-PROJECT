@@ -46,7 +46,7 @@ public class AddDeviceIdActivity extends BaseActivity {
                 IntentIntegrator integrator = new IntentIntegrator(AddDeviceIdActivity.this);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
                 //integrator.setCaptureActivity(CaptureQRcodePortrait.class);
-                integrator.setPrompt("Scan a QR code");
+                integrator.setPrompt(getString(R.string.scan_a_qr_code));
                 integrator.setOrientationLocked(false);
                 integrator.initiateScan();
             }
@@ -72,9 +72,9 @@ public class AddDeviceIdActivity extends BaseActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, (R.string.cancelled), Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.scanned) + result.getContents(), Toast.LENGTH_LONG).show();
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
                     String deviceId = result.getContents();

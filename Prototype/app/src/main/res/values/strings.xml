@@ -150,4 +150,27 @@
     </string-array>
     <string name="language_english">English</string>
     <string name="language_french">Français</string>
+    <string name="press_next_to_continue">Press next to continue</string>
+    <string name="app_version_update">App Version/Update</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="help_and_support">Help and Support</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="app_info">App Info</string>
+    <string name="scan_a_qr_code">Scan a QR code</string>
+    <string name="scanned">"Scanned: "</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="password_updated_successfully">Password updated successfully</string>
+    <string name="invalid_passwords_please_check_and_try_again">Invalid passwords, please check and try again</string>
+    <string name="incorrect_current_password_please_try_again">Incorrect current password, please try again</string>
+    <string name="image_uploaded_successfully">Image Uploaded Successfully!</string>
+    <string name="upload_failed">Upload Failed 👎</string>
+    <string name="email_field_can_t_be_empty">Email field can\'t be empty</string>
+    <string name="reset_password_link_has_been_sent_to_your_email_registered">Reset Password link has been sent to your Email registered</string>
+    <string name="error">Error :-</string>
+    <string name="please_enable_notifications_for_this_app_in_the_device_settings">Please enable notifications for this app in the device settings</string>
+    <string name="user_details_updated_successfully">User details updated successfully</string>
+    <string name="invalid_email_address">Invalid email address</string>
+    <string name="invalid_information_please_check_and_try_again">Invalid information, please check and try again</string>
+    <string name="failed_to_update_password">"Failed to update password: "</string>
+    <string name="reauthentication_failed">"Reauthentication failed: "</string>
 </resources>

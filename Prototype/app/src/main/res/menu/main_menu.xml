@@ -43,7 +43,7 @@
             </group>
         </menu>
     </item>
-    <item android:title="App Info">
+    <item android:title="@string/app_info">
         <menu>
             <group android:checkableBehavior="single">
                 <item android:id="@+id/aboutUs"

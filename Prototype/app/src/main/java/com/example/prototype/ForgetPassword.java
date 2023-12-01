@@ -53,7 +53,7 @@ public class ForgetPassword extends BaseActivity {
                         if (!TextUtils.isEmpty(Email)) {
                             ResetPassword();
                         } else {
-                            editText1.setError("Email field can't be empty");
+                            editText1.setError(getString(R.string.email_field_can_t_be_empty));
                             progressBar.setVisibility(View.GONE);
                         }
                     }
@@ -74,7 +74,7 @@ public class ForgetPassword extends BaseActivity {
         mAuth.sendPasswordResetEmail(Email).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(ForgetPassword.this, "Reset Password link has been sent to your Email registered", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ForgetPassword.this, (R.string.reset_password_link_has_been_sent_to_your_email_registered), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ForgetPassword.this, SignInActivity.class);
                         startActivity(intent);
                         finish();
@@ -83,7 +83,7 @@ public class ForgetPassword extends BaseActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ForgetPassword.this, "Error :-" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ForgetPassword.this, getString(R.string.error) + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

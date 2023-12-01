@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -27,8 +27,6 @@
             android:padding="12dp"
             android:src="@drawable/ic_back_arrow" />
 
-
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,16 +39,19 @@
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
-        android:layout_width="365dp"
-        android:layout_height="511dp"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="0.5in"
-        android:layout_marginBottom="0.5in"
         android:justificationMode="inter_word"
         android:text="@string/contact_info_text"
         android:textColor="@color/deep_navy_blue"
         android:textSize="20dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintVertical_bias="0.08" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
